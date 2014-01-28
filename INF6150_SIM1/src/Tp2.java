@@ -71,15 +71,15 @@ public class Tp2 {
       j++;  
       if(difficulte.compareTo("moyen")==0 || difficulte.compareTo("MOYEN")==0)
       {
-         JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.MOYEN );
+         JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.getMoyen() );
       }
       if(difficulte.compareTo("facile")==0 || difficulte.compareTo("FACILE")==0)
       {
-        JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.FACILE );
+        JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.getFacile() );
       }
       if(difficulte.compareTo("difficile")==0 || difficulte.compareTo("DIFFICILE")==0)
       {
-        JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.DIFFICILE );
+        JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.getDifficile() );
       }
       operande1 = JeuArithmetique.operandeAuHasard ();
       operande2 = JeuArithmetique.operandeAuHasard ();

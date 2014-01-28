@@ -13,9 +13,10 @@ import java.util.Random;
 
 public class JeuArithmetique {
 
-	public static final int FACILE = 1;
-	public static final int MOYEN = 3;
-	public static final int DIFFICILE = 4;
+	private  static final int FACILE = 1;
+	private  static final int MOYEN = 3;
+	private  static final int DIFFICILE = 4;
+	private  static final int EXTREME = 5;
 	private static int degreDifficulte = FACILE;
 	private static int germe = 25;
 	private static Random generateur = new Random(germe);
@@ -26,6 +27,25 @@ public class JeuArithmetique {
 	private static final int OP_MAX_MOYEN = 50;
 	private static final int OP_MIN_DIFFICILE = -25;
 	private static final int OP_MAX_DIFFICILE = 25;
+	private static final int OP_MIN_EXTREME = 0;
+	private static final int OP_MAX_EXTREME = 0;
+
+	
+	private static String operations = "+-*/%^";
+
+	
+	
+	public static int getFacile() {
+		return FACILE;
+	}
+
+	public static int getMoyen() {
+		return MOYEN;
+	}
+
+	public static int getDifficile() {
+		return DIFFICILE;
+	}
 
 	/**
 	 * Permet de definir le degre de difficulte. FACILE : operations + et -,
@@ -37,11 +57,13 @@ public class JeuArithmetique {
 	 *            degre de difficulte. Si autre que FACILE, MOYEN ou DIFFICILE,
 	 *            FACILE sera choisi.
 	 */
-	public static void choisirDegreDifficulte(int degre) {
+	public static  void choisirDegreDifficulte(int degre) {
 		if (degre == MOYEN || degre == DIFFICILE) {
 			degreDifficulte = degre;
-		} else {
+		} else if(degre == FACILE){
 			degreDifficulte = FACILE;
+		} else{
+			degreDifficulte = EXTREME;
 		}
 	} // choisirDegreDifficulte
 
@@ -52,7 +74,7 @@ public class JeuArithmetique {
 	 * @return le caractere correspondant a l'operation
 	 */
 	public static char operationAuHasard() {
-		final String operations = "+-*/%";
+		
 		return operations.charAt(nombreAleatoire(0, degreDifficulte));
 	} // operationAuHasard
 
@@ -82,9 +104,11 @@ public class JeuArithmetique {
 		if (min > max) {
 			reponse = 0;
 		} else {
+			
 			reponse = (int) Math.floor((max - min + 1)
 					* generateur.nextDouble())
 					+ min;
+			System.out.println(generateur.nextDouble());
 		}
 		return reponse;
 	} // nombreAleatoire
