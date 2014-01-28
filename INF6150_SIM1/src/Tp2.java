@@ -6,10 +6,10 @@ public class Tp2 {
     String level = "";// degre de difficulte
     boolean acces =true ;
    do{
-    System.out.print("Choisissez un degre de difficulte (facile, moyen ou difficile) : ");// saisir le degre de difficulte
+    System.out.print("Choisissez un degre de difficulte (facile, moyen ou difficile ou extreme) : ");// saisir le degre de difficulte
     level = Clavier.lireString(); // valider le degre de difficulte
 
-    if( level.compareTo("facile")==0 || level.compareTo("moyen")==0 || level.compareTo("difficile")==0 || level.compareTo("MOYEN")==0 || level.compareTo("FACILE")==0 || level.compareTo("DIFFICILE")==0){// si l utilisateur veut effectuer une operation
+    if( level.compareTo("facile")==0 || level.compareTo("moyen")==0 || level.compareTo("difficile")==0 || level.compareTo("MOYEN")==0 || level.compareTo("FACILE")==0 || level.compareTo("DIFFICILE")==0 || level.compareTo("extreme") == 0){// si l utilisateur veut effectuer une operation
        acces = false   ;
    }else{
    System.out.println("*** choix invalide");// si le choix est invalide
@@ -54,7 +54,7 @@ public class Tp2 {
     float score = 0;
     char operation = ' ';
     String pourcentage="";
-    System.out.println("Ce programme demande a l utilisateur de saisir son nom, s il veut faire une operation, choisir le degre de difficulte, et continue de proposer des operations arithmetiques tant que l utilisateur choisi oui,OUI,O ou o.et si l utilisateur choisi non il lui donne le resultat obtenu en fonction des operations faites et du nombre de tentatives faites avant de trouver le bon resultas(3 tentatives max)");
+    System.out.println("Ce programme demande a l utilisateur de saisir son nom, s il veut faire une operation, choisir le degre de difficulte,extreme et continue de proposer des operations arithmetiques tant que l utilisateur choisi oui,OUI,O ou o.et si l utilisateur choisi non il lui donne le resultat obtenu en fonction des operations faites et du nombre de tentatives faites avant de trouver le bon resultas(3 tentatives max)");
     
     System.out.print("Veuillez donner votre nom : ");
     nom = Clavier.lireString();
@@ -81,9 +81,13 @@ public class Tp2 {
       {
         JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.getDifficile() );
       }
+      if(difficulte.compareTo("extreme")==0 || difficulte.compareTo("EXTREME")==0)
+      {
+        JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.getExtreme() );
+      }
       operande1 = JeuArithmetique.operandeAuHasard ();
-      operande2 = JeuArithmetique.operandeAuHasard ();
       operation = JeuArithmetique.operationAuHasard ();
+      operande2 = JeuArithmetique.operandeAuHasard ();
       System.out.println(operande1+" "+operation+" "+operande2+" = ?" );
       
       System.out.println("");
@@ -101,6 +105,8 @@ public class Tp2 {
       correction = operande1  / operande2 ;
       if ( operation == '%')
       correction = operande1  % operande2 ;
+      if ( operation == '^')
+          correction = (int) Math.pow(operande1,operande2)    ;
       
       if(resultat == correction){
       System.out.println("Bravo "+nom+" ! Bonne reponse !");

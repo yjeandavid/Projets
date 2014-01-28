@@ -27,11 +27,15 @@ public class JeuArithmetique {
 	private static final int OP_MAX_MOYEN = 50;
 	private static final int OP_MIN_DIFFICILE = -25;
 	private static final int OP_MAX_DIFFICILE = 25;
-	private static final int OP_MIN_EXTREME = 0;
-	private static final int OP_MAX_EXTREME = 0;
+	private static final int OP_MIN_EXTREME = 2;
+	private static final int OP_MAX_EXTREME = 10;
 
 	
 	private static String operations = "+-*/%^";
+	
+	private static char exposant ;
+	private static final int caree = 2;
+	private static final int cube = 3;
 
 	
 	
@@ -45,6 +49,12 @@ public class JeuArithmetique {
 
 	public static int getDifficile() {
 		return DIFFICILE;
+	}
+
+	
+	
+	public static int getExtreme() {
+		return EXTREME;
 	}
 
 	/**
@@ -74,8 +84,9 @@ public class JeuArithmetique {
 	 * @return le caractere correspondant a l'operation
 	 */
 	public static char operationAuHasard() {
-		
-		return operations.charAt(nombreAleatoire(0, degreDifficulte));
+		 
+		 exposant = operations.charAt(nombreAleatoire(0, degreDifficulte));
+		 return exposant;
 	} // operationAuHasard
 
 	/**
@@ -90,10 +101,16 @@ public class JeuArithmetique {
 			reponse = nombreAleatoire(OP_MIN_FACILE, OP_MAX_FACILE);
 		} else if (degreDifficulte == MOYEN) {
 			reponse = nombreAleatoire(OP_MIN_MOYEN, OP_MAX_MOYEN);
-		} else {
+		} else if (degreDifficulte == DIFFICILE){
 			do {
 				reponse = nombreAleatoire(OP_MIN_DIFFICILE, OP_MAX_DIFFICILE);
 			} while (reponse == 0);
+		}else {
+			
+			if (exposant  == '^') reponse = nombreAleatoire(caree, cube);
+			else reponse = nombreAleatoire(OP_MIN_EXTREME, OP_MAX_EXTREME);
+			 
+			
 		}
 		return reponse;
 	} // operandeAuHasard
