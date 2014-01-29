@@ -91,13 +91,32 @@ public class JeuArithmetique {
 	 * @return le caractere correspondant a l'operation
 	 */
 	public static char operationAuHasard() {
+		return operationAuHasardSelonLevel(0);	
+	} // operationAuHasard
+	
+	/**
+	 * Retourne une operation excluant "exposant" choisie au hasard en fonction du degre de
+	 * difficulte choisi
+	 * 
+	 * @return le caractere correspondant a l'operation
+	 */
+	public static char operationAuHasardSansExposant() {
+		return operationAuHasardSelonLevel(-1);
+	}
 
-		exposant = operations.charAt(nombreAleatoire(0, degreDifficulte));
+	/**
+	 * Retourne une operation choisie au hasard en fonction du degre de
+	 * difficulte choisi
+	 * @param int indice, entier negatif ou 0. 
+	 * @return le caractere correspondant a l'operation
+	 */
+	public static char operationAuHasardSelonLevel(int indice) {
+		exposant = operations.charAt(nombreAleatoire(0, degreDifficulte + indice));
 		if (exposant == '^')
 			nombreExposant++;
 		return exposant;
-	} // operationAuHasard
-
+	}
+	
 	/**
 	 * Retourne un nombre choisi au hasard en fonction du degre de difficulte
 	 * choisi
