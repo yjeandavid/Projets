@@ -33,10 +33,10 @@ public class JeuArithmetique {
 
 	private static char exposant;
 	private static int nombreExposant = 0;
-	private static int nombreOperandes = 0;
 	private static final int caree = 2;
 	private static final int cube = 3;
 
+	
 	public static int getFacile() {
 		return FACILE;
 	}
