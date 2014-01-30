@@ -1,4 +1,3 @@
-inf6150_finissants
-==================
+Projets
 
-dossiers pour les simulations
+Pour mes propres projets et tests
