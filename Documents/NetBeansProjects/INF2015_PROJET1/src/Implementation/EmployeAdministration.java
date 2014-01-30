@@ -52,9 +52,8 @@ public class EmployeAdministration extends IEmploye {
         }
         heureDeBureauParSemaine += minuteTravailBureauJour;
         
-        if (message.isEmpty())
-            if (minuteTravailBureauJour < minHeureTravBuro)
-                message += Settings.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
+        if (minuteTravailBureauJour < minHeureTravBuro)
+           message += Settings.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
     }
     
     private void traiteFeuilleDeTemps(int minMinuteBureauJour,
