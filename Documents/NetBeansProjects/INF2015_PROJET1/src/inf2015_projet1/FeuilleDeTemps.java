@@ -17,7 +17,6 @@ import net.sf.json.JSONObject;
  * @author Michael
  */
 public class FeuilleDeTemps {
-    private int noEmploye;
     private IProjet jour1[];
     private IProjet jour2[];
     private IProjet jour3[];
@@ -28,7 +27,6 @@ public class FeuilleDeTemps {
     
     public FeuilleDeTemps(JSONObject jsonObject)
     {
-        noEmploye = jsonObject.getInt("numero_employe");
         JSONArray jour = jsonObject.getJSONArray("jour1");
         jour1 = traiterJourJSON(jour);
         jour = jsonObject.getJSONArray("jour2");
@@ -60,12 +58,6 @@ public class FeuilleDeTemps {
             ++i;
         }
         return resultat;
-    }
-    
-    
-    public int getNoEmploye()
-    {
-        return noEmploye;
     }
     
     public IProjet[] getJour1()

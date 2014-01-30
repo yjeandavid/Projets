@@ -8,7 +8,6 @@ import Configurations.Settings;
 import Implementation.EmployeAdministration;
 import Implementation.EmployeNormal;
 import Interfaces.IEmploye;
-import Interfaces.IProjet;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
