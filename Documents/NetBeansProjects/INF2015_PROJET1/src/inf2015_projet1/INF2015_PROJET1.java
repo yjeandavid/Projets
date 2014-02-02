@@ -38,7 +38,7 @@ public class INF2015_PROJET1 {
                 listEmploye[i].traiterFeuillesDeTemps();
                 String result[] = listEmploye[i].getMessage().split(",");
                 for (int j = 0; j < result.length; ++j)
-                    listResult.add(result[i]);
+                    listResult.add(result[j]);
             }
             FileWriter fw = new FileWriter(args[1]);
             fw = (FileWriter) listResult.write(fw);

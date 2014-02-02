@@ -24,6 +24,7 @@ public abstract class IEmploye {
     
     public String getMessage()
     {
-        return message.substring(0, (message.length()-3));
+        return !message.isEmpty() ? message.substring(0, (message.length()-1)) 
+                : message;
     }
 }
