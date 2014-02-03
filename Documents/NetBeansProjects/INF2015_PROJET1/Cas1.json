@@ -26,13 +26,11 @@
 	}
 	],
 	"jour5": [
-            ],
-	"weekend1": [
             {
 		"projet":125,
 		"minutes": 420
 	}
-        ],
-	"weekend2": [
-	]
+            ],
+	"weekend1": [],
+	"weekend2": []
 }
