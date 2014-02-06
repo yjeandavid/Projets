@@ -9,8 +9,8 @@ package Interfaces;
  * @author Michael
  */
 public abstract class IProjet {
-    protected int noProjet;
-    protected int minutes;
+    private int noProjet;
+    private int minutes;
     
     public int getNoProjet()
     {
