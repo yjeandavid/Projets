@@ -5,6 +5,7 @@ import java.util.List;
 
 import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
+import ca.uqam.inf2015.tp1.gestionDonnees.JsonFactory;
 
 public class Inf2015Projet1 {
 
@@ -35,7 +36,7 @@ public class Inf2015Projet1 {
                 }
 		
                 //faire l'inscription dans le fichier resultat
-                System.out.println(messageValidation);
+                JsonFactory.buildJsonFile(args[1], messageValidation);
 	}
 	
 	
