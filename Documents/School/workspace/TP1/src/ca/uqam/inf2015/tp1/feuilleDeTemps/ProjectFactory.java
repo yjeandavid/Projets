@@ -19,14 +19,14 @@ public abstract class ProjectFactory {
 		List<Projet> projets;
 		List<List<Projet>> jours = new ArrayList<>(NB_DAYS_TOTAL);
 		
-		for (int i = 0; i < jours.size(); i++) {
+		for (int i = 0; i < NB_DAYS_TOTAL; i++) {
 			if (i < NB_DAYS_WEEK) {
 				projets = buildProject(rootElt.getJSONArray(
 						AppConfig.CLE_JOUR + String.valueOf(i + 1)));
 			}
 			else {
 				projets = buildProject(rootElt.getJSONArray(
-						AppConfig.CLE_WEEKEND + String.valueOf(i + 1)));
+						AppConfig.CLE_WEEKEND + String.valueOf(i - NB_DAYS_WEEK + 1)));
 			}
 			
 			jours.add(projets);
@@ -44,7 +44,7 @@ public abstract class ProjectFactory {
 		while (iterator.hasNext()) {
 			JSONObject projectElt = iterator.next();
 			
-			projets.add(new Projet(projectElt.getInt(AppConfig.CLE_PROJET), 
+			projets.add(Projet.buildProjet(projectElt.getInt(AppConfig.CLE_PROJET), 
 					projectElt.getDouble(AppConfig.CLE_MINUTES)));
 		}
 		

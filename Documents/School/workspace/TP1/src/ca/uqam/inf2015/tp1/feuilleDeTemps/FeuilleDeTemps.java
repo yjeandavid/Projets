@@ -5,106 +5,93 @@ import java.util.List;
 
 public class FeuilleDeTemps {
     
-    //private List<Projet> projets;
     private List<List<Projet>> jours;
     
-    public FeuilleDeTemps()
+    public FeuilleDeTemps(){}
+   
+    public List<List<Projet>> getJours() 
     {
+            return jours;
     }
-    
-   /* public List<Projet> getProjets() 
+
+    public void setJours(List<List<Projet>> jours) 
     {
-		return projets;
-	}
+            this.jours = jours;
+    }
 
-	public void setProjets(List<Projet> projets) 
-	{
-		this.projets = projets;
-	}*/
+    public String validerJoursOuvrables(int minimumHeuresBureauParJour)
+    {
+        String messageValidation = "";
+        final short NBRE_JOURS_OUVRABLES = 5;
 
-	public List<List<Projet>> getJours() 
-	{
-		return jours;
-	}
+        for (int numeroJour = 0; numeroJour < NBRE_JOURS_OUVRABLES; 
+                ++numeroJour)
+        {
+            double heureBureauJour;
+            List<Projet> projectList = jours.get(numeroJour);
+            heureBureauJour = calculerHeuresBureauJour(projectList);
+            if (heureBureauJour < minimumHeuresBureauParJour)
+            {
+                messageValidation += 
+                        AppConfig.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
+            }
+        }
+        return messageValidation;
+    }
 
-	public void setJours(List<List<Projet>> jours) 
-	{
-		this.jours = jours;
-	}
+    public double calculerHeuresBureauParSemaine()
+    {
+        double heuresBureauSemaine = 0.0;
 
-        public String validerJoursOuvrables(int minimumHeuresBureauParJour)
+        for (int numeroJour = 0; numeroJour < jours.size(); ++numeroJour)
         {
-            String messageValidation = "";
-            final short NBRE_JOURS_OUVRABLES = 5;
-            
-            for (int numeroJour = 0; numeroJour < NBRE_JOURS_OUVRABLES; 
-                    ++numeroJour)
-            {
-                double heureBureauJour;
-                List<Projet> projectList = jours.get(numeroJour);
-                heureBureauJour = calculerHeuresBureauJour(projectList);
-                if (heureBureauJour < minimumHeuresBureauParJour)
-                {
-                    messageValidation += 
-                            AppConfig.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
-                }
-            }
-            return messageValidation;
+            List<Projet> projectList = jours.get(numeroJour);
+            heuresBureauSemaine += calculerHeuresBureauJour(projectList);
         }
-        
-        public double calculerHeuresBureauParSemaine()
+        return heuresBureauSemaine;
+    }
+
+    public double calculerHeuresTeleTravailParSemaine()
+    {
+        double heuresTeleTravailSemaine = 0.0;
+
+        for (int numeroJour = 0; numeroJour < jours.size(); ++numeroJour)
         {
-            double heuresBureauSemaine = 0.0;
-            
-            for (int numeroJour = 0; numeroJour < jours.size(); ++numeroJour)
-            {
-                List<Projet> projectList = jours.get(numeroJour);
-                heuresBureauSemaine += calculerHeuresBureauJour(projectList);
-            }
-            return heuresBureauSemaine;
+            List<Projet> projectList = jours.get(numeroJour);
+            heuresTeleTravailSemaine += calculerHeuresTeleTravailJour(
+                                                               projectList);
         }
-        
-        public double calculerHeuresTeleTravailParSemaine()
+        return heuresTeleTravailSemaine;
+    }
+
+    public double calculerHeuresBureauJour(List<Projet> projetsDuJour)
+    {
+        double heuresBureauJour = 0.0;
+        for (int j = 0; j < projetsDuJour.size(); ++j)
         {
-            double heuresTeleTravailSemaine = 0.0;
-            
-            for (int numeroJour = 0; numeroJour < jours.size(); ++numeroJour)
+            Projet aProject = projetsDuJour.get(j);
+            if (aProject.getNoProjet() < 
+                    AppConfig.CODE_REF_TELE_TRAVAIL)
             {
-                List<Projet> projectList = jours.get(numeroJour);
-                heuresTeleTravailSemaine += calculerHeuresTeleTravailJour(
-                                                                   projectList);
+                heuresBureauJour += (projetsDuJour.get(j)).getMinutes();
             }
-            return heuresTeleTravailSemaine;
         }
-        
-        public double calculerHeuresBureauJour(List<Projet> projetsDuJour)
+        return heuresBureauJour;
+    }
+
+    public double calculerHeuresTeleTravailJour(List<Projet> projetsDuJour)
+    {
+        double heuresTeleTravailJour = 0.0;
+        for (int j = 0; j < projetsDuJour.size(); ++j)
         {
-            double heuresBureauJour = 0.0;
-            for (int j = 0; j < projetsDuJour.size(); ++j)
+            Projet aProject = projetsDuJour.get(j);
+            if (aProject.getNoProjet() >= 
+                    AppConfig.CODE_REF_TELE_TRAVAIL)
             {
-                Projet aProject = projetsDuJour.get(j);
-                if (aProject.getNoProjet() < 
-                        AppConfig.CODE_REF_TELE_TRAVAIL)
-                {
-                    heuresBureauJour += (projetsDuJour.get(j)).getMinutes();
-                }
+                heuresTeleTravailJour += (projetsDuJour.get(j))
+                                                              .getMinutes();
             }
-            return heuresBureauJour;
         }
-        
-        public double calculerHeuresTeleTravailJour(List<Projet> projetsDuJour)
-        {
-            double heuresTeleTravailJour = 0.0;
-            for (int j = 0; j < projetsDuJour.size(); ++j)
-            {
-                Projet aProject = projetsDuJour.get(j);
-                if (aProject.getNoProjet() >= 
-                        AppConfig.CODE_REF_TELE_TRAVAIL)
-                {
-                    heuresTeleTravailJour += (projetsDuJour.get(j))
-                                                                  .getMinutes();
-                }
-            }
-            return heuresTeleTravailJour;
-        }
+        return heuresTeleTravailJour;
+    }
 }

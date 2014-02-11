@@ -5,22 +5,6 @@ import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 
 public class Employe {
 	
-//	protected int noEmploye;
-//    protected int minHeureDeBureauParJour;
-//    protected int minHeureDeBureauParSemaine;
-//    protected int heureDeBureauParSemaine;
-//    protected int heureTeleTravailParSemaine;
-//    protected int plafondHeureBureauSemaine;
-//    protected FeuilleDeTemps[] feuillesDeTemps;
-//    protected String message;
-//    
-//    public abstract void traiterFeuillesDeTemps();
-//    
-//    public String getMessage()
-//    {
-//        return message.substring(0, (message.length()-3));
-//    }
-	
 	private char typeEmploye;
 	private int noEmploye;
 	private FeuilleDeTemps timeSheet = null;

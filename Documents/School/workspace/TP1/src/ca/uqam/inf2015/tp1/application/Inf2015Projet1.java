@@ -6,7 +6,7 @@ import java.util.List;
 import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
 
-public class ValidationFeuilleDeTemps {
+public class Inf2015Projet1 {
 
 	/**
 	 * @param args

@@ -1,16 +1,23 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
+import ca.uqam.inf2015.tp1.application.AppConfig;
+
 public class Projet {
 
 	private int noProjet;
     private double minutes;
-    private int typeProjet;
+    private boolean isTeleTravail;
     
-    public Projet(int noProjet, double minutes)
+    public static Projet buildProjet(int noProjet, double minutes)
+    {
+    	return new Projet(noProjet, minutes);			
+    }
+    
+    private Projet(int noProjet, double minutes)
     {
     	setNoProjet(noProjet);
     	setMinutes(minutes);
-    	setTypeProjet();
+    	setIsTeleTravail();
     }
     
     public int getNoProjet()
@@ -23,9 +30,9 @@ public class Projet {
         return minutes;
     }
     
-    public int getTypeProjet()
+    public boolean getIsTeleTravail()
     {
-    	return typeProjet;
+    	return isTeleTravail;
 	}
     
     public void setNoProjet(int noProjet)
@@ -38,8 +45,10 @@ public class Projet {
         this.minutes = minutes;
     }
     
-    private void setTypeProjet()
+    private void setIsTeleTravail()
     {
-    	
+    	if (noProjet > AppConfig.CODE_REF_TELE_TRAVAIL) {
+    		isTeleTravail = true;
+    	}
     }
 }
