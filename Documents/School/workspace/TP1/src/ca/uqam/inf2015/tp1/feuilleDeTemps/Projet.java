@@ -6,7 +6,6 @@ public class Projet {
 
     private int noProjet;
     private double minutes;
-    //private boolean isTeleTravail;
     
     public static Projet buildProjet(int noProjet, double minutes)
     {
@@ -17,7 +16,6 @@ public class Projet {
     {
     	setNoProjet(noProjet);
     	setMinutes(minutes);
-    	//setIsTeleTravail();
     }
     
     public int getNoProjet()
@@ -29,11 +27,6 @@ public class Projet {
     {
         return minutes;
     }
-    
-    /*public boolean getIsTeleTravail()
-    {
-    	return isTeleTravail;
-	}*/
     
     public void setNoProjet(int noProjet)
     {

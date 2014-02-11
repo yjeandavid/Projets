@@ -14,7 +14,8 @@ public abstract class ProjectFactory {
 	private static final short NB_DAYS_WEEK = 5;
 	
 	
-	public static List<List<Projet>> buildProjectFromJsonFile(JSONObject rootElt)
+	public static List<List<Projet>> buildProjectFromJsonFile(
+                                                            JSONObject rootElt)
 	{
 		List<Projet> projets;
 		List<List<Projet>> jours = new ArrayList<>();
@@ -22,11 +23,13 @@ public abstract class ProjectFactory {
 		for (int i = 0; i < NB_DAYS_TOTAL; i++) {
 			if (i < NB_DAYS_WEEK) {
 				projets = buildProject(rootElt.getJSONArray(
-						AppConfig.CLE_JOUR + String.valueOf(i + 1)));
+						AppConfig.CLE_JOUR + 
+                                        String.valueOf(i + 1)));
 			}
 			else {
 				projets = buildProject(rootElt.getJSONArray(
-						AppConfig.CLE_WEEKEND + String.valueOf(i - NB_DAYS_WEEK + 1)));
+						AppConfig.CLE_WEEKEND + 
+                                        String.valueOf(i - NB_DAYS_WEEK + 1)));
 			}
 			
 			jours.add(projets);
@@ -44,8 +47,9 @@ public abstract class ProjectFactory {
 		while (iterator.hasNext()) {
 			JSONObject projectElt = iterator.next();
 			
-			projets.add(Projet.buildProjet(projectElt.getInt(AppConfig.CLE_PROJET), 
-					projectElt.getDouble(AppConfig.CLE_MINUTES)));
+			projets.add(Projet.buildProjet(
+                                projectElt.getInt(AppConfig.CLE_PROJET), 
+				projectElt.getDouble(AppConfig.CLE_MINUTES)));
 		}
 		
 		return projets;

@@ -27,7 +27,6 @@ public class Inf2015Projet1 {
 		
 		employes = EmployeFactory.buildEmployesFromJsonFile(args[0]);
 		
-		// faire validation regle d'affaire
                 String messageValidation = "";
                 for(int i = 0; i < employes.size(); ++i)
                 {
@@ -35,7 +34,6 @@ public class Inf2015Projet1 {
                     messageValidation += anEmployee.validerFeuilleDeTemps();
                 }
 		
-                //faire l'inscription dans le fichier resultat
                 JsonFactory.buildJsonFile(args[1], messageValidation);
 	}
 	
