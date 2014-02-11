@@ -17,7 +17,7 @@ public abstract class ProjectFactory {
 	public static List<List<Projet>> buildProjectFromJsonFile(JSONObject rootElt)
 	{
 		List<Projet> projets;
-		List<List<Projet>> jours = new ArrayList<>(NB_DAYS_TOTAL);
+		List<List<Projet>> jours = new ArrayList<>();
 		
 		for (int i = 0; i < NB_DAYS_TOTAL; i++) {
 			if (i < NB_DAYS_WEEK) {

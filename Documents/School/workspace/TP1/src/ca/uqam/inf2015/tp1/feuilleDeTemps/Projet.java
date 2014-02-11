@@ -4,9 +4,9 @@ import ca.uqam.inf2015.tp1.application.AppConfig;
 
 public class Projet {
 
-	private int noProjet;
+    private int noProjet;
     private double minutes;
-    private boolean isTeleTravail;
+    //private boolean isTeleTravail;
     
     public static Projet buildProjet(int noProjet, double minutes)
     {
@@ -17,7 +17,7 @@ public class Projet {
     {
     	setNoProjet(noProjet);
     	setMinutes(minutes);
-    	setIsTeleTravail();
+    	//setIsTeleTravail();
     }
     
     public int getNoProjet()
@@ -30,10 +30,10 @@ public class Projet {
         return minutes;
     }
     
-    public boolean getIsTeleTravail()
+    /*public boolean getIsTeleTravail()
     {
     	return isTeleTravail;
-	}
+	}*/
     
     public void setNoProjet(int noProjet)
     {
@@ -45,10 +45,12 @@ public class Projet {
         this.minutes = minutes;
     }
     
-    private void setIsTeleTravail()
+    public boolean IsTeleTravail()
     {
+        boolean isTeleTravail = false;
     	if (noProjet > AppConfig.CODE_REF_TELE_TRAVAIL) {
     		isTeleTravail = true;
     	}
+        return isTeleTravail;
     }
 }

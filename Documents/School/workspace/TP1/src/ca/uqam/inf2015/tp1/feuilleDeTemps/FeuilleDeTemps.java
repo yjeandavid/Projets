@@ -70,8 +70,7 @@ public class FeuilleDeTemps {
         for (int j = 0; j < projetsDuJour.size(); ++j)
         {
             Projet aProject = projetsDuJour.get(j);
-            if (aProject.getNoProjet() < 
-                    AppConfig.CODE_REF_TELE_TRAVAIL)
+            if (!aProject.IsTeleTravail())
             {
                 heuresBureauJour += (projetsDuJour.get(j)).getMinutes();
             }
@@ -85,8 +84,7 @@ public class FeuilleDeTemps {
         for (int j = 0; j < projetsDuJour.size(); ++j)
         {
             Projet aProject = projetsDuJour.get(j);
-            if (aProject.getNoProjet() >= 
-                    AppConfig.CODE_REF_TELE_TRAVAIL)
+            if (aProject.IsTeleTravail())
             {
                 heuresTeleTravailJour += (projetsDuJour.get(j))
                                                               .getMinutes();
