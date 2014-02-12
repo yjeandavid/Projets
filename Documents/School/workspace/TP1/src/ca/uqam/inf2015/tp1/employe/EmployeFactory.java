@@ -38,7 +38,7 @@ public abstract class EmployeFactory
 			throws FileNotFoundException, IOException
 	{	
 		rootElt = JSONObject.fromObject(IOUtils.toString(
-				new FileInputStream(filePath), StandardCharsets.UTF_8));
+                        new FileInputStream(filePath), StandardCharsets.UTF_8));
 	}
 	
 	private static List<Employe> parseJsonFile() throws IOException
