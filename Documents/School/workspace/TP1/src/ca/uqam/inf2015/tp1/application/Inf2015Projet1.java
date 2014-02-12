@@ -24,7 +24,6 @@ public class Inf2015Projet1 {
 					+ "en entree.");
 			System.exit(1);
 		}
-		
 		employes = EmployeFactory.buildEmployesFromJsonFile(args[0]);
 		
                 String messageValidation = "";
