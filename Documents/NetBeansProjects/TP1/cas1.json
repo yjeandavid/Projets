@@ -3,38 +3,34 @@
 	"jour1": [
 	{
 		"projet": 200,
-		"minutes": 180
+		"minutes": 420
 	}
+	
 	],
 	"jour2": [
 	{
 		"projet": 125,
-		"minutes": 396
+		"minutes": 420
 	}
 	],
 	"jour3": [
 	{
 		"projet": 125,
-		"minutes": 396
+		"minutes": 420
 	}
 	],
 	"jour4": [
 	{
 		"projet": 125,
-		"minutes": 396
+		"minutes": 420
 	}
 	],
 	"jour5": [
             {
-		"projet": 125,
-		"minutes": 396
+		"projet":125,
+		"minutes": 420
 	}
-        ],
-	"weekend1": [
-             {
-		"projet": 125,
-		"minutes": 396
-	}
-        ],
+            ],
+	"weekend1": [],
 	"weekend2": []
 }

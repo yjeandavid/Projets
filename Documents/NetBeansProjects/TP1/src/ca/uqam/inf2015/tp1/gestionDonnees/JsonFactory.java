@@ -9,22 +9,23 @@ import net.sf.json.JSONArray;
  * @author Michael
  */
 public abstract class JsonFactory {
-    
-    public static void buildJsonFile(String filePath, String messages)
-            throws IOException
-    {
+
+    public static void buildJsonFile(String filePath, String messages)throws IOException {
         JSONArray messageArray = new JSONArray();
         String theMessages[] = messages.split(",");
         
-        for (int i = 0; i < theMessages.length; ++i)
-        {
+        if(!(theMessages.length == 1 && theMessages[0].equals("")))
+        for (int i = 0; i < theMessages.length; ++i) {
             String aMessage = theMessages[i];
             messageArray.add(aMessage);
         }
+        WriterJsonFile(filePath, messageArray);
+    }
+
+    private static void WriterJsonFile(String filePath, JSONArray messageArray) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw = (FileWriter) messageArray.write(fw);
         fw.flush();
         fw.close();
     }
-    
 }
