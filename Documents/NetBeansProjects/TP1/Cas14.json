@@ -1,0 +1,36 @@
+{
+	"numero_employe": 1999,
+	"jour1": [
+	{
+		"projet": 999,
+		"minutes": 410
+	}
+	
+	],
+	"jour2": [
+	{
+		"projet": 125,
+		"minutes": 420
+	}
+	],
+	"jour3": [
+	{
+		"projet": 125,
+		"minutes": 420
+	}
+	],
+	"jour4": [
+	{
+		"projet": 125,
+		"minutes": 420
+	}
+	],
+	"jour5": [],
+	"weekend1": [],
+	"weekend2": [
+	{
+		"projet": 990,
+		"minutes": 420
+	}
+	]
+}

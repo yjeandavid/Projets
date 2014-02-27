@@ -4,10 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import net.sf.json.JSONArray;
 
-/**
- *
- * @author Michael
- */
+
 public abstract class JsonFactory {
 
     public static void buildJsonFile(String filePath, String messages)throws IOException {

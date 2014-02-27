@@ -48,9 +48,11 @@ public class Employe {
                 case AppConfig.EMPLOYE_ADMINISTRATION:
                                 messageValidation = validerSemaineTypeAdmin();
                                 break;
-                case AppConfig.EMPLOYE_NORMAL:
-                                messageValidation = validerSemaineTypeNormal();
+                case AppConfig.EMPLOYE_EXPLOITATION:
+                                messageValidation = validerSemaineTypeExploitation();
                                 break;
+                case AppConfig.EMPLOYE_PRODUCTION:   
+                                messageValidation = validerSemaineTypeProduction();
             }
             return messageValidation;
         }
@@ -65,19 +67,38 @@ public class Employe {
                     AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
             messageValidation += validerHeuresTeleTravailParSemaine(
                     AppConfig.MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE) + ',';
-            
+            messageValidation += validerJoursCongesMaladies();
+             messageValidation += validerCongesFeries();
+                       
             return messageValidation;
         }
         
-        public String validerSemaineTypeNormal()
+        public String validerSemaineTypeExploitation()
         {
             String messageValidation = "";
             
             messageValidation += validerJoursOuvrablesNormal() + ',';
             messageValidation += validerHeuresTravailBureauParSemaine(
-                    AppConfig.MINIMUM_MINUTES_BUREAU_NORMAL_SEMAINE,
+                    AppConfig.MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE,
                     AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
+           messageValidation += validerJoursCongesMaladies();
+           messageValidation += validerCongesFeries();
+
+            return messageValidation;
+        }
+        
+        public String validerSemaineTypeProduction()
+        {
+            String messageValidation = "";
             
+            messageValidation += validerJoursOuvrablesNormal() + ',';
+            messageValidation += validerHeuresTravailBureauParSemaine(
+                    AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE,
+                    AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
+            messageValidation += validerJoursCongesMaladies();
+           messageValidation += validerCongesFeries();
+
+                       
             return messageValidation;
         }
         
@@ -90,7 +111,7 @@ public class Employe {
         public String validerJoursOuvrablesNormal()
         {
             return timeSheet.validerJoursOuvrables(
-                    AppConfig.MINIMUM_MINUTES_BUREAU_NORMAL_PAR_JOUR);
+                    AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR);
         }
         
         public String validerHeuresTravailBureauParSemaine(
@@ -125,6 +146,15 @@ public class Employe {
             }
             
             return messageValidation;
+        }
+        
+        private String validerJoursCongesMaladies() 
+        {
+            return timeSheet.validerCongesMaladie(AppConfig.MINUTES_CONGES_MALADIE);
+        }
+        private String validerCongesFeries()
+        {
+             return timeSheet.validerCongesFeries(AppConfig.MINUTES_CONGES_FERIES);
         }
         
 	public int getNoEmplye()
@@ -166,11 +196,20 @@ public class Employe {
 	
 	private void setTypeEmploye()
 	{
-            if (noEmploye >= AppConfig.CODE_REF_TYPE_EMPLOYE) {
-                typeEmploye = AppConfig.EMPLOYE_NORMAL;
+            if (noEmploye >= AppConfig.CODE_REF_TYPE_EMPLOYE 
+             && noEmploye < AppConfig.CODE_REF_TYPE_EMPLOYE_CATEGORIE)
+            {
+                typeEmploye = AppConfig.EMPLOYE_PRODUCTION;
             }
-            else {
+            else if(noEmploye > AppConfig.CODE_REF_TYPE_EMPLOYE_CATEGORIE)
+            {
+                typeEmploye = AppConfig.EMPLOYE_EXPLOITATION;
+            }
+            else 
+            {
                 typeEmploye = AppConfig.EMPLOYE_ADMINISTRATION;
             }
 	}
+
+    
 }
