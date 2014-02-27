@@ -20,8 +20,7 @@ public class Inf2015Projet1 {
 		List<Employe> employes;
 		
 		if (args.length < 2) {
-			System.out.println("Vous devez donner 2 fichiers .json "
-					+ "en entree.");
+			System.out.println("Vous devez donner 2 fichiers .json en entree.");
 			System.exit(1);
 		}
 		employes = EmployeFactory.buildEmployesFromJsonFile(args[0]);
@@ -32,7 +31,7 @@ public class Inf2015Projet1 {
                     Employe anEmployee = employes.get(i);
                     messageValidation += anEmployee.validerFeuilleDeTemps();
                 }
-		
+
                 JsonFactory.buildJsonFile(args[1], messageValidation);
 	}
 	
