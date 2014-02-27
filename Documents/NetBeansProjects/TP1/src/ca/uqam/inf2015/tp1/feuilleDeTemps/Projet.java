@@ -7,69 +7,55 @@ public class Projet {
     private int noProjet;
     private double minutes;
     
-    public static Projet buildProjet(int noProjet, double minutes)
-    {
+    public static Projet buildProjet(int noProjet, double minutes) {
     	return new Projet(noProjet, minutes);			
     }
     
-    private Projet(int noProjet, double minutes)
-    {
+    private Projet(int noProjet, double minutes) {
     	setNoProjet(noProjet);
     	setMinutes(minutes);
     }
     
-    public int getNoProjet()
-    {
+    public int getNoProjet() {
         return noProjet;
     }
     
-    public double getMinutes()
-    {
+    public double getMinutes() {
         return minutes;
     }
     
-    public void setNoProjet(int noProjet)
-    {
+    public void setNoProjet(int noProjet) {
         this.noProjet = noProjet;
     }
     
-    public void setMinutes(double minutes)
-    {
+    public void setMinutes(double minutes) {
         this.minutes = minutes;
     }
     
-    public boolean IsTeleTravail()
-    {
+    public boolean IsTeleTravail() {
          boolean isTeleTravail = false;
-            if (noProjet >= AppConfig.CODE_REF_TELE_TRAVAIL
-             && noProjet != AppConfig.CODE_REF_CONGES_FERIES
-             && noProjet != AppConfig.CODE_REF_CONGES_MALADIE) 
-            {
-                isTeleTravail = true;
-            }
+        if (noProjet >= AppConfig.CODE_REF_TELE_TRAVAIL
+                && noProjet != AppConfig.CODE_REF_CONGES_FERIES
+                && noProjet != AppConfig.CODE_REF_CONGES_MALADIE) {
+            isTeleTravail = true;
+        }
         return isTeleTravail;
     }
     
-    public boolean IsCongesMaladie()
-    {
+    public boolean IsCongesMaladie() {
         return TypeProjet(AppConfig.CODE_REF_CONGES_MALADIE);
     }
     
-    public boolean IsCongesFeries()
-    {
+    public boolean IsCongesFeries() {
         return TypeProjet(AppConfig.CODE_REF_CONGES_FERIES);
     }
-    private boolean TypeProjet(int typeProjet)
-    {
+    
+    private boolean TypeProjet(int typeProjet){
         boolean istypeProjet = false;
-            if (noProjet == typeProjet) 
-            {
-                istypeProjet = true;
-            }
+        if (noProjet == typeProjet) {
+            istypeProjet = true;
+        }
         return istypeProjet;
     }
-    
-    
-    
-    
+
 }

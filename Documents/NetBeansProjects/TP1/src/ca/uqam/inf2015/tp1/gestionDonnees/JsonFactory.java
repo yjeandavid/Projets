@@ -7,15 +7,15 @@ import net.sf.json.JSONArray;
 
 public abstract class JsonFactory {
 
-    public static void buildJsonFile(String filePath, String messages)throws IOException {
+    public static void buildJsonFile(String filePath, String messages) throws IOException {
         JSONArray messageArray = new JSONArray();
         String theMessages[] = messages.split(",");
         
         if(!(theMessages.length == 1 && theMessages[0].equals("")))
-        for (int i = 0; i < theMessages.length; ++i) {
-            String aMessage = theMessages[i];
-            messageArray.add(aMessage);
-        }
+            for (int i = 0; i < theMessages.length; ++i) {
+                String aMessage = theMessages[i];
+                messageArray.add(aMessage);
+            }
         WriterJsonFile(filePath, messageArray);
     }
 

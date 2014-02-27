@@ -17,34 +17,26 @@ public class Inf2015Projet1 {
 	 *            le second represente le fichier de sortie
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException 
-	{
+	public static void main(String[] args) throws IOException {
 		List<Employe> employes;
                 String messageValidation = "";
                 
-                try
-                {
-                    if (args.length < 2) {
-                             throw new MissingArgumentsException();
-                    }
+                try {
+                    if (args.length < 2)
+                        throw new MissingArgumentsException();
+                    
                     employes = EmployeFactory.buildEmployesFromJsonFile(args[0]);
 
-                    for(int i = 0; i < employes.size(); ++i)
-                    {
+                    for(int i = 0; i < employes.size(); ++i) {
                         Employe anEmployee = employes.get(i);
                         messageValidation += anEmployee.validerFeuilleDeTemps();
                     }
-                } catch (MissingDataInJSONFileException mdijfe)
-                {
+                } catch (MissingDataInJSONFileException mdijfe) {
                     mdijfe.souleverException();
-                } catch (MissingArgumentsException mae) 
-                {
+                } catch (MissingArgumentsException mae) {
                     mae.souleverException();
-                } finally
-                {
+                } finally {
                     JsonFactory.buildJsonFile(args[1], messageValidation);
                 }
 	}
-	
-	
 }
