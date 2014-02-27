@@ -7,6 +7,8 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
+import net.sf.json.JSONException;
 
 public abstract class ProjectFactory {
 	
@@ -14,12 +16,13 @@ public abstract class ProjectFactory {
 	private static final short NB_DAYS_WEEK = 5;
 	
 	
-	public static List<List<Projet>> buildProjectFromJsonFile(
-                                                            JSONObject rootElt)
+	public static List<List<Projet>> buildProjectFromJsonFile(JSONObject rootElt) throws MissingDataInJSONFileException
 	{
 		List<Projet> projets;
 		List<List<Projet>> jours = new ArrayList<>();
 		
+                try
+                {
 		for (int i = 0; i < NB_DAYS_TOTAL; i++) {
 			if (i < NB_DAYS_WEEK) {
 				projets = buildProject(rootElt.getJSONArray(
@@ -34,7 +37,10 @@ public abstract class ProjectFactory {
 			
 			jours.add(projets);
 		}
-		
+                } catch (JSONException jsone)
+                {
+                    throw new MissingDataInJSONFileException();
+                } 
 		return jours;
 	}
 	

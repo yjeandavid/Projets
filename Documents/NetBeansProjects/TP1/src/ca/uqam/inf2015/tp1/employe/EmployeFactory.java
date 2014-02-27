@@ -12,6 +12,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.ProjectFactory;
 
@@ -20,6 +21,7 @@ public abstract class EmployeFactory
 	private static JSONObject rootElt;
 	
 	public static List<Employe> buildEmployesFromJsonFile(String filePath)
+                 throws MissingDataInJSONFileException
 	{		
 		List<Employe> employes = null;
 		
@@ -27,21 +29,20 @@ public abstract class EmployeFactory
 			init(filePath);
 			employes = parseJsonFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return employes;
 	}
 	
-	private static void init(String filePath) 
-			throws FileNotFoundException, IOException
+	private static void init(String filePath) throws FileNotFoundException, IOException
 	{	
-		rootElt = JSONObject.fromObject(IOUtils.toString(
-                        new FileInputStream(filePath), StandardCharsets.UTF_8));
+		rootElt = JSONObject.fromObject(IOUtils.toString(new FileInputStream(filePath),
+                        StandardCharsets.UTF_8));
 	}
 	
-	private static List<Employe> parseJsonFile() throws IOException
+	private static List<Employe> parseJsonFile() 
+                throws IOException, MissingDataInJSONFileException
     {
         List<Employe> employes = new ArrayList<>();
         
@@ -53,7 +54,7 @@ public abstract class EmployeFactory
         return employes;
     }
 	
-	private static Employe buildEmploye(int noEmploye)
+	private static Employe buildEmploye(int noEmploye)  throws MissingDataInJSONFileException
 	{
 		Employe employe = new Employe(noEmploye);
 		FeuilleDeTemps timeSheet = new FeuilleDeTemps();
