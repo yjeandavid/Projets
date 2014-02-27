@@ -1,6 +1,7 @@
 package ca.uqam.inf2015.tp1.employe;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 
 public class Employe {
@@ -17,7 +18,7 @@ public class Employe {
 		setTypeEmploye();
 	}
 	
-        public String validerFeuilleDeTemps()
+        public String validerFeuilleDeTemps() throws MissingDataInJSONFileException
         {
             String messages = validerFeuilleDeTempsSelonType();
             String messageValidation = "";
@@ -39,7 +40,7 @@ public class Employe {
             return messageValidation;
         }
         
-        private String validerFeuilleDeTempsSelonType()
+        private String validerFeuilleDeTempsSelonType() throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -57,7 +58,7 @@ public class Employe {
             return messageValidation;
         }
         
-        public String validerSemaineTypeAdmin()
+        public String validerSemaineTypeAdmin() throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -73,7 +74,7 @@ public class Employe {
             return messageValidation;
         }
         
-        public String validerSemaineTypeExploitation()
+        public String validerSemaineTypeExploitation() throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -87,7 +88,7 @@ public class Employe {
             return messageValidation;
         }
         
-        public String validerSemaineTypeProduction()
+        public String validerSemaineTypeProduction() throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -102,21 +103,20 @@ public class Employe {
             return messageValidation;
         }
         
-        public String validerJoursOuvrablesAdmin()
+        public String validerJoursOuvrablesAdmin() throws MissingDataInJSONFileException
         {   
             return timeSheet.validerJoursOuvrables(
                     AppConfig.MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR);
         }
         
-        public String validerJoursOuvrablesNormal()
+        public String validerJoursOuvrablesNormal() throws MissingDataInJSONFileException
         {
             return timeSheet.validerJoursOuvrables(
                     AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR);
         }
         
-        public String validerHeuresTravailBureauParSemaine(
-                int minimumHeuresDeBureauParSemaine,
-                int maximumHeuresDeBureauParSemaine)
+        public String validerHeuresTravailBureauParSemaine(int minimumHeuresDeBureauParSemaine,
+                int maximumHeuresDeBureauParSemaine) throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -133,8 +133,8 @@ public class Employe {
             return messageValidation;
         }
         
-        public String validerHeuresTeleTravailParSemaine(
-                int maximumHeuresTeleTravailParSemaine)
+        public String validerHeuresTeleTravailParSemaine(int maximumHeuresTeleTravailParSemaine)
+                throws MissingDataInJSONFileException
         {
             String messageValidation = "";
             
@@ -148,7 +148,7 @@ public class Employe {
             return messageValidation;
         }
         
-        private String validerJoursCongesMaladies() 
+        private String validerJoursCongesMaladies() throws MissingDataInJSONFileException
         {
             return timeSheet.validerCongesMaladie(AppConfig.MINUTES_CONGES_MALADIE);
         }

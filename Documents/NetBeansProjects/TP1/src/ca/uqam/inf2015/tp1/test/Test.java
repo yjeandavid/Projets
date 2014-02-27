@@ -6,13 +6,14 @@ package ca.uqam.inf2015.tp1.test;
 
 import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
+import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import java.io.IOException;
 import java.util.List;
 
 
 public class Test 
 {
-   public static void main(String[] args) throws IOException 
+   public static void main(String[] args) throws IOException, MissingDataInJSONFileException 
    {
        int nombreCas = 15;
           for(int cas = 1;  cas <= nombreCas; cas++)
@@ -25,7 +26,7 @@ public class Test
            
    } 
    
-   public static void test(String filePath)
+   public static void test(String filePath) throws MissingDataInJSONFileException
    {
        List<Employe> employes = EmployeFactory.buildEmployesFromJsonFile(filePath);
        String messageValidation = "";

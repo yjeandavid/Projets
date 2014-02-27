@@ -1,6 +1,7 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import java.util.List;
 
 public class FeuilleDeTemps {
@@ -20,6 +21,7 @@ public class FeuilleDeTemps {
     }
 
     public String validerJoursOuvrables(int minimumHeuresBureauParJour)
+            //throws MissingDataInJSONFileException
     {
         String messageValidation = "";
         final short NBRE_JOURS_OUVRABLES = 5;
@@ -35,6 +37,7 @@ public class FeuilleDeTemps {
                 messageValidation += 
                         AppConfig.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
             }
+            //throw new MissingDataInJSONFileException();
         }
         return messageValidation;
     }
