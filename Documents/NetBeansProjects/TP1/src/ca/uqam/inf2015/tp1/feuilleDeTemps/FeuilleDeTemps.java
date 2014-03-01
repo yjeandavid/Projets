@@ -17,7 +17,8 @@ public class FeuilleDeTemps {
             this.jours = jours;
     }
 
-    public String validerJoursOuvrables(int minimumHeuresBureauParJour) {
+    public String validerJoursOuvrables(int minimumHeuresBureauParJour,
+                                        int maximumHeuresBureauParJour) {
         String messageValidation = "";
         final short NBRE_JOURS_OUVRABLES = 5;
 
@@ -26,7 +27,11 @@ public class FeuilleDeTemps {
             List<Projet> projectList = jours.get(numeroJour);
             heureBureauJour = calculerHeuresBureauJour(projectList);
             if (heureBureauJour < minimumHeuresBureauParJour) {
-                messageValidation += AppConfig.MSG_HEURES_MINIMUM_JOUR_BUREAU + ',';
+                messageValidation += AppConfig.MSG_HEURES_MINIMUM_JOUR_BUREAU + 
+                                     AppConfig.CLE_JOUR + String.valueOf(numeroJour + 1) + ',';
+            } else if (heureBureauJour > maximumHeuresBureauParJour) {
+                messageValidation += AppConfig.MSG_MAXIMAL_HOURS_OFFICE_WORK_BY_DAY + 
+                                     String.valueOf(numeroJour + 1) + ',';
             }
         }
         return messageValidation;

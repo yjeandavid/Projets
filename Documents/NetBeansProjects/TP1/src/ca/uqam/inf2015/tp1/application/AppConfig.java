@@ -13,6 +13,7 @@ public class AppConfig {
     public static final int MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR = 240;
     public static final int MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE = 2280;
     public static final int MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR = 360;
+    public static final int MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY = 1440;
     public static final int MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE = 2580;
     public static final int MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE = 600;
     public static final int MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE = 2280;
@@ -25,11 +26,13 @@ public class AppConfig {
    
     
     public static final String MSG_HEURES_MINIMUM_JOUR_BUREAU = "L'employe n'a "
-            + "pas travaille le nombre d'heures minimal par jours ouvrables ";
+            + "pas travaille le nombre d'heures minimal pour ";
     public static final String MSG_HEURES_MINIMUM_SEMAINE_BUREAU = "L'employe "
             + "n'a pas travaille le nombre d'heures minimal par semaine ";
-    public static final String MSG_HEURES_MAXIMAL_BUREAU = "L'employe a depasse"
-            + " le nombre d'heures au bureau ";
+    public static final String MSG_HEURES_MAXIMAL_BUREAU_SEMAINE = "L'employe a depasse"
+            + " le nombre d'heures au bureau par semaine";
+    public static final String MSG_MAXIMAL_HOURS_OFFICE_WORK_BY_DAY = "L'employe a depasse"
+            + " le nombre d'heures au bureau pour jour";
     public static final String MSG_HEURES_MAXIMAL_TELE_TRAVAIL = "L'employe a"
             + " depasse le nombre d'heures de teletravail permis ";
     public static final String MSG_HEURES_CONGES_MALADIE = "L'employe n'a"

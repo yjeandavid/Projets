@@ -1,7 +1,6 @@
 package ca.uqam.inf2015.tp1.employe;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
-import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 
 public class Employe {
@@ -91,12 +90,14 @@ public class Employe {
     }
 
     public String validerJoursOuvrablesAdmin() {   
-        return timeSheet.validerJoursOuvrables(AppConfig.MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR);
+        return timeSheet.validerJoursOuvrables(AppConfig.MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR,
+                                               AppConfig.MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY);
     }
 
     public String validerJoursOuvrablesNormal() {
         return timeSheet.validerJoursOuvrables(
-                                          AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR);
+                                          AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR,
+                                          AppConfig.MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY);
     }
 
     public String validerHeuresTravailBureauParSemaine(int minimumHeuresDeBureauParSemaine,
@@ -106,7 +107,7 @@ public class Employe {
         if (heuresDeBureauParSemaine < minimumHeuresDeBureauParSemaine) {
             messageValidation += AppConfig.MSG_HEURES_MINIMUM_SEMAINE_BUREAU + ',';
         } else if (heuresDeBureauParSemaine > maximumHeuresDeBureauParSemaine) {
-            messageValidation += AppConfig.MSG_HEURES_MAXIMAL_BUREAU + ',';
+            messageValidation += AppConfig.MSG_HEURES_MAXIMAL_BUREAU_SEMAINE + ',';
         }
 
         return messageValidation;
