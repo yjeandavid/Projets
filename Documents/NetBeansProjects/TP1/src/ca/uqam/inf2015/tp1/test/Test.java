@@ -26,17 +26,20 @@ public class Test
            
    } 
    
-   public static void test(String filePath) throws MissingDataInJSONFileException
-   {
-       List<Employe> employes = EmployeFactory.buildEmployesFromJsonFile(filePath);
-       String messageValidation = "";
+   public static void test(String filePath) {
+       try {
+           List<Employe> employes = EmployeFactory.buildEmployesFromJsonFile(filePath);
+           String messageValidation = "";
        
-       for(int i = 0; i < employes.size(); ++i)
-       {
-          Employe anEmployee = employes.get(i);
-          messageValidation += anEmployee.validerFeuilleDeTemps();
+           for(int i = 0; i < employes.size(); ++i)
+           {
+              Employe anEmployee = employes.get(i);
+              messageValidation += anEmployee.validerFeuilleDeTemps();
+           }
+           System.out.println(messageValidation);
+       } catch (MissingDataInJSONFileException mdijfe) {
+           mdijfe.souleverException();
        }
-       System.out.println(messageValidation);
    }
    
 }
