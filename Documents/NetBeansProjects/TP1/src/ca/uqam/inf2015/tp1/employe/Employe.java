@@ -1,19 +1,12 @@
 package ca.uqam.inf2015.tp1.employe;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import ca.uqam.inf2015.tp1.application.AppConfig;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTempsDDC2;
-
-//~--- JDK imports ------------------------------------------------------------
-
 import java.io.IOException;
 
 public class Employe {
     private FeuilleDeTemps feuileDeTemps               = null;
-    private double         heuresDeBureauParSemaine    = 0.0;
-    private double         heuresTeleTravailParSemaine = 0.0;
     private int            noEmploye;
     private char           typeEmploye;
 
@@ -22,7 +15,7 @@ public class Employe {
         setTypeEmploye();
     }
 
-    public String validerFeuilleDeTemps() throws IOException {
+    /*public String validerFeuilleDeTemps() throws IOException {
         String messages          = validerFeuilleDeTempsSelonType();
         String messageValidation = "";
         String theMessages[]     = messages.split(",");
@@ -118,7 +111,7 @@ public class Employe {
                 feuileDeTemps.getJours()).resultatFinalProduction();
 
         return messageValidation;
-    }
+    }*/
 
     public String validerJoursOuvrablesAdmin() throws IOException {
         return feuileDeTemps
@@ -131,16 +124,12 @@ public class Employe {
     }
 
     public String validerJoursOuvrablesNormal() throws IOException {
-        return feuileDeTemps
-            .validerJoursOuvrables(
-                AppConfig
-                    .getParametreRetournerUnDouble(
-                        "MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"), AppConfig
-                            .getParametreRetournerUnDouble(
-                                "MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY"));
+        return feuileDeTemps.validerJoursOuvrables(
+                AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"), 
+                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY"));
     }
 
-    public String validerHeuresTravailBureauParSemaine(
+    /*public String validerHeuresTravailBureauParSemaine(
             double minimumHeuresDeBureauParSemaine,
             double maximumHeuresDeBureauParSemaine)
             throws IOException {
@@ -168,7 +157,7 @@ public class Employe {
         }
 
         return messageValidation;
-    }
+    }*/
 
     private String validerJoursCongesMaladies() throws IOException {
         return feuileDeTemps.validerCongesMaladie(
@@ -196,39 +185,19 @@ public class Employe {
         this.feuileDeTemps = timeSheet;
     }
 
-    public void setHeuresDeBureauParSemaine() throws IOException {
-        heuresDeBureauParSemaine =
-            feuileDeTemps.calculerHeuresBureauParSemaine();
-    }
-
-    public void setHeuresDeTeleTravailParSemaine() throws IOException {
-        heuresTeleTravailParSemaine =
-            feuileDeTemps.calculerHeuresTeleTravailParSemaine();
-    }
-
     public char getTypeEmploye() {
         return typeEmploye;
     }
 
     private void setTypeEmploye() throws IOException {
-        if ((noEmploye
-                >= AppConfig.getParametreRetournerUnDouble(
-                    "CODE_REF_TYPE_EMPLOYE")) && (noEmploye
-                        < AppConfig.getParametreRetournerUnDouble(
-                            "CODE_REF_TYPE_EMPLOYE_CATEGORIE"))) {
-            typeEmploye =
-                AppConfig.getParametreRetournerUnInt("EMPLOYE_PRODUCTION");
-        } else if (noEmploye
-                   > AppConfig.getParametreRetournerUnDouble(
-                       "CODE_REF_TYPE_EMPLOYE_CATEGORIE")) {
-            typeEmploye =
-                AppConfig.getParametreRetournerUnInt("EMPLOYE_EXPLOITATION");
+        if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE")) {
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_ADMINISTRATION");
+        } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_CATEGORIE")) {
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_PRODUCTION");
+        } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_DIRECTEUR")) {
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_EXPLOITATION");
         } else {
-            typeEmploye =
-                AppConfig.getParametreRetournerUnInt("EMPLOYE_ADMINISTRATION");
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DIRECTEUR");
         }
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

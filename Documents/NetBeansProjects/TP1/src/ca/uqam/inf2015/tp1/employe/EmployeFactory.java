@@ -53,8 +53,6 @@ public abstract class EmployeFactory {
 
         timeSheet.setJours(ProjectFactory.construireProjetAPartirDeFichierJson(elementDeRacine));
         employe.setfFeuilleDeTemps(timeSheet);
-        employe.setHeuresDeBureauParSemaine();
-        employe.setHeuresDeTeleTravailParSemaine();
 
         return employe;
     }

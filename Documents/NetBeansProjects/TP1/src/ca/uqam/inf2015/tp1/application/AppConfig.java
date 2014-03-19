@@ -28,7 +28,7 @@ public class AppConfig {
         return configurations.getString(parametreDemande);
     }
 
-    public static char getParametreRetournerUnInt(String parametreDemande) {
+    public static char getParametreRetournerUnChar(String parametreDemande) {
         return configurations.getString(parametreDemande).charAt(0);
     }
 }

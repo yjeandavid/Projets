@@ -1,11 +1,6 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import ca.uqam.inf2015.tp1.application.AppConfig;
-
-//~--- JDK imports ------------------------------------------------------------
-
 import java.io.IOException;
 
 public class Projet {
@@ -40,15 +35,8 @@ public class Projet {
     public boolean estTeleTravail() throws IOException {
         boolean isTeleTravail = false;
 
-        if ((noProjet
-                >= AppConfig.getParametreRetournerUnDouble(
-                    "CODE_REF_TELE_TRAVAIL")) && (noProjet
-                        != AppConfig.getParametreRetournerUnDouble(
-                            "CODE_REF_CONGES_FERIES")) && (noProjet
-                                != AppConfig.getParametreRetournerUnDouble(
-                                    "CODE_REF_CONGES_MALADIE")) && (noProjet
-                                        != AppConfig.getParametreRetournerUnDouble(
-                                            "CODE_REF_JOURNEE_VACANCE"))) {
+        if (AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") <= noProjet
+                && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_PARENTAL")) {
             isTeleTravail = true;
         }
 
@@ -56,31 +44,33 @@ public class Projet {
     }
 
     public boolean estUnCongeMaladie() throws IOException {
-        return TypeDeProjet(
-            AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_MALADIE"));
+        boolean isCongeMaladie = false;
+        
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_MALADIE")) {
+            isCongeMaladie = true;
+        }
+        
+        return isCongeMaladie;
     }
 
     public boolean estUnCongeFerie() throws IOException {
-        return TypeDeProjet(
-            AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_FERIES"));
+        boolean isCongeFerie = false;
+        
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_FERIES")) {
+            isCongeFerie = true;
+        }
+        
+        return isCongeFerie;
     }
 
     public boolean estJourneeVacance() throws IOException {
-        return TypeDeProjet(
-            AppConfig.getParametreRetournerUnDouble(
-                "CODE_REF_JOURNEE_VACANCE"));
-    }
-
-    private boolean TypeDeProjet(double typeProjet) {
-        boolean estUnTypeDeProjet = false;
-
-        if (noProjet == typeProjet) {
-            estUnTypeDeProjet = true;
+        boolean isCongeVacance = false;
+        
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_VACANCES")) {
+            isCongeVacance = true;
         }
-
-        return estUnTypeDeProjet;
+        
+        return isCongeVacance;
     }
+
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
