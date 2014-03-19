@@ -32,10 +32,20 @@ public class Projet {
         this.minutes = minutes;
     }
 
+    public boolean estTravailBureau() throws IOException {
+        boolean isTravailBureau = false;
+        
+        if (noProjet <= AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL")) {
+            isTravailBureau = true;
+        }
+        
+        return isTravailBureau;
+    }
+    
     public boolean estTeleTravail() throws IOException {
         boolean isTeleTravail = false;
 
-        if (AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") <= noProjet
+        if (AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") < noProjet
                 && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_PARENTAL")) {
             isTeleTravail = true;
         }

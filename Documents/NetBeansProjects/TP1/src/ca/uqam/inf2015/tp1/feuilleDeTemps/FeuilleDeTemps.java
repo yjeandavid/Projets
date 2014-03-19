@@ -68,14 +68,14 @@ public class FeuilleDeTemps {
         return heuresTeleTravailSemaine;
     }
 
-    public double calculerHeuresBureauJour(List<Projet> projetsDuJour)
+    private double calculerHeuresBureauJour(List<Projet> projetsDuJour)
             throws IOException {
         double heuresBureauJour = 0.0;
 
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet aProject = projetsDuJour.get(j);
 
-            if (!aProject.estTeleTravail()) {
+            if (aProject.estTravailBureau()) {
                 heuresBureauJour += (projetsDuJour.get(j)).getMinutes();
             }
         }
