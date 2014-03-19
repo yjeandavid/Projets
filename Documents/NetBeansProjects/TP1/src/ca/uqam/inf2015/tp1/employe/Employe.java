@@ -1,134 +1,183 @@
 package ca.uqam.inf2015.tp1.employe;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import ca.uqam.inf2015.tp1.application.AppConfig;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
+import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTempsDDC2;
+
+//~--- JDK imports ------------------------------------------------------------
+
+import java.io.IOException;
 
 public class Employe {
-    private char typeEmploye;
-    private int noEmploye;
-    private FeuilleDeTemps timeSheet = null;
-    private double heuresDeBureauParSemaine = 0.0;
-    private double heuresTeleTravailParSemaine = 0.0;
+    private FeuilleDeTemps feuileDeTemps               = null;
+    private double         heuresDeBureauParSemaine    = 0.0;
+    private double         heuresTeleTravailParSemaine = 0.0;
+    private int            noEmploye;
+    private char           typeEmploye;
 
-    public Employe(int noEmploye) {
+    public Employe(int noEmploye) throws IOException {
         this.noEmploye = noEmploye;
         setTypeEmploye();
     }
 
-    public String validerFeuilleDeTemps() {
-        String messages = validerFeuilleDeTempsSelonType();
+    public String validerFeuilleDeTemps() throws IOException {
+        String messages          = validerFeuilleDeTempsSelonType();
         String messageValidation = "";
-        String theMessages[] = messages.split(",");
+        String theMessages[]     = messages.split(",");
 
         for (int i = 0; i < theMessages.length; ++i) {
             String aMessage = theMessages[i];
-            if(!aMessage.isEmpty()) {
+
+            if (!aMessage.isEmpty()) {
                 messageValidation += aMessage + ',';
             }
         }
+
         if (!messageValidation.isEmpty()) {
-            messageValidation = messageValidation.substring(0, messageValidation.length() - 1);
+            messageValidation = messageValidation.substring(0,
+                    messageValidation.length() - 1);
         }
+
         return messageValidation;
     }
 
-    private String validerFeuilleDeTempsSelonType() {
+    private String validerFeuilleDeTempsSelonType() throws IOException {
         String messageValidation = "";
 
-        switch (typeEmploye) {
-            case AppConfig.EMPLOYE_ADMINISTRATION:
-                            messageValidation = validerSemaineTypeAdmin();
-                            break;
-            case AppConfig.EMPLOYE_EXPLOITATION:
-                            messageValidation = validerSemaineTypeExploitation();
-                            break;
-            case AppConfig.EMPLOYE_PRODUCTION:   
-                            messageValidation = validerSemaineTypeProduction();
+        if (typeEmploye
+                == AppConfig.getParametreRetournerUnInt(
+                    "EMPLOYE_ADMINISTRATION")) {
+            messageValidation = validerSemaineTypeAdmin();
+        } else if (typeEmploye
+                   == AppConfig.getParametreRetournerUnInt(
+                       "EMPLOYE_EXPLOITATION")) {
+            messageValidation = validerSemaineTypeExploitation();
+        } else if (typeEmploye
+                   == AppConfig.getParametreRetournerUnInt(
+                       "EMPLOYE_PRODUCTION")) {
+            messageValidation = validerSemaineTypeProduction();
         }
+
         return messageValidation;
     }
 
-    public String validerSemaineTypeAdmin() {
+    public String validerSemaineTypeAdmin() throws IOException {
         String messageValidation = "";
 
         messageValidation += validerJoursOuvrablesAdmin() + ',';
         messageValidation += validerHeuresTravailBureauParSemaine(
-                                           AppConfig.MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE,
-                                           AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
+            AppConfig
+                .getParametreRetournerUnDouble(
+                    "MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"), AppConfig
+                        .getParametreRetournerUnDouble(
+                            "MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE")) + ',';
         messageValidation += validerHeuresTeleTravailParSemaine(
-                                       AppConfig.MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE) + ',';
+            AppConfig.getParametreRetournerUnDouble(
+                "MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE")) + ',';
         messageValidation += validerJoursCongesMaladies();
         messageValidation += validerCongesFeries();
+        messageValidation += new FeuilleDeTempsDDC2(feuileDeTemps,
+                feuileDeTemps.getJours()).resultatFinalAdmin();
 
         return messageValidation;
     }
 
-    public String validerSemaineTypeExploitation() {
+    public String validerSemaineTypeExploitation() throws IOException {
         String messageValidation = "";
 
         messageValidation += validerJoursOuvrablesNormal() + ',';
         messageValidation += validerHeuresTravailBureauParSemaine(
-                                        AppConfig.MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE,
-                                        AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
+            AppConfig
+                .getParametreRetournerUnDouble(
+                    "MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE"), AppConfig
+                        .getParametreRetournerUnDouble(
+                            "MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE")) + ',';
         messageValidation += validerJoursCongesMaladies();
         messageValidation += validerCongesFeries();
+        messageValidation += new FeuilleDeTempsDDC2(feuileDeTemps,
+                feuileDeTemps.getJours()).resultatFinalExploitation();
 
         return messageValidation;
     }
 
-    public String validerSemaineTypeProduction() {
+    public String validerSemaineTypeProduction() throws IOException {
         String messageValidation = "";
 
         messageValidation += validerJoursOuvrablesNormal() + ',';
         messageValidation += validerHeuresTravailBureauParSemaine(
-                                        AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE,
-                                        AppConfig.MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE) + ',';
+            AppConfig
+                .getParametreRetournerUnDouble(
+                    "MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE"), AppConfig
+                        .getParametreRetournerUnDouble(
+                            "MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE")) + ',';
         messageValidation += validerJoursCongesMaladies();
         messageValidation += validerCongesFeries();
+        messageValidation += new FeuilleDeTempsDDC2(feuileDeTemps,
+                feuileDeTemps.getJours()).resultatFinalProduction();
 
         return messageValidation;
     }
 
-    public String validerJoursOuvrablesAdmin() {   
-        return timeSheet.validerJoursOuvrables(AppConfig.MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR,
-                                               AppConfig.MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY);
+    public String validerJoursOuvrablesAdmin() throws IOException {
+        return feuileDeTemps
+            .validerJoursOuvrables(
+                AppConfig
+                    .getParametreRetournerUnDouble(
+                        "MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR"), AppConfig
+                            .getParametreRetournerUnDouble(
+                                "MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY"));
     }
 
-    public String validerJoursOuvrablesNormal() {
-        return timeSheet.validerJoursOuvrables(
-                                          AppConfig.MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR,
-                                          AppConfig.MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY);
+    public String validerJoursOuvrablesNormal() throws IOException {
+        return feuileDeTemps
+            .validerJoursOuvrables(
+                AppConfig
+                    .getParametreRetournerUnDouble(
+                        "MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"), AppConfig
+                            .getParametreRetournerUnDouble(
+                                "MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY"));
     }
 
-    public String validerHeuresTravailBureauParSemaine(int minimumHeuresDeBureauParSemaine,
-                                                       int maximumHeuresDeBureauParSemaine) {
+    public String validerHeuresTravailBureauParSemaine(
+            double minimumHeuresDeBureauParSemaine,
+            double maximumHeuresDeBureauParSemaine)
+            throws IOException {
         String messageValidation = "";
 
         if (heuresDeBureauParSemaine < minimumHeuresDeBureauParSemaine) {
-            messageValidation += AppConfig.MSG_HEURES_MINIMUM_SEMAINE_BUREAU + ',';
+            messageValidation += AppConfig.getParametreRetournerUnString(
+                "MSG_HEURES_MINIMUM_SEMAINE_BUREAU") + ',';
         } else if (heuresDeBureauParSemaine > maximumHeuresDeBureauParSemaine) {
-            messageValidation += AppConfig.MSG_HEURES_MAXIMAL_BUREAU_SEMAINE + ',';
+            messageValidation += AppConfig.getParametreRetournerUnString(
+                "MSG_HEURES_MAXIMAL_BUREAU_SEMAINE") + ',';
         }
 
         return messageValidation;
     }
 
-    public String validerHeuresTeleTravailParSemaine(int maximumHeuresTeleTravailParSemaine) {
+    public String validerHeuresTeleTravailParSemaine(
+            double maximumHeuresTeleTravailParSemaine)
+            throws IOException {
         String messageValidation = "";
 
         if (heuresTeleTravailParSemaine > maximumHeuresTeleTravailParSemaine) {
-            messageValidation += AppConfig.MSG_HEURES_MAXIMAL_TELE_TRAVAIL + ',';
+            messageValidation += AppConfig.getParametreRetournerUnString(
+                "MSG_HEURES_MAXIMAL_TELE_TRAVAIL") + ',';
         }
 
         return messageValidation;
     }
 
-    private String validerJoursCongesMaladies() {
-        return timeSheet.validerCongesMaladie(AppConfig.MINUTES_CONGES_MALADIE);
+    private String validerJoursCongesMaladies() throws IOException {
+        return feuileDeTemps.validerCongesMaladie(
+            AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_MALADIE"));
     }
-    
-    private String validerCongesFeries() {
-         return timeSheet.validerCongesFeries(AppConfig.MINUTES_CONGES_FERIES);
+
+    private String validerCongesFeries() throws IOException {
+        return feuileDeTemps.validerCongesFeries(
+            AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_FERIES"));
     }
 
     public int getNoEmplye() {
@@ -140,34 +189,46 @@ public class Employe {
     }
 
     public FeuilleDeTemps getFeuilleDeTemps() {
-        return timeSheet;
+        return feuileDeTemps;
     }
 
     public void setfFeuilleDeTemps(FeuilleDeTemps timeSheet) {
-        this.timeSheet = timeSheet;
+        this.feuileDeTemps = timeSheet;
     }
 
-    public void setHeuresDeBureauParSemaine() {
-        heuresDeBureauParSemaine = timeSheet.calculerHeuresBureauParSemaine();
+    public void setHeuresDeBureauParSemaine() throws IOException {
+        heuresDeBureauParSemaine =
+            feuileDeTemps.calculerHeuresBureauParSemaine();
     }
 
-    public void setHeuresDeTeleTravailParSemaine() {
-        heuresTeleTravailParSemaine = timeSheet.calculerHeuresTeleTravailParSemaine();
+    public void setHeuresDeTeleTravailParSemaine() throws IOException {
+        heuresTeleTravailParSemaine =
+            feuileDeTemps.calculerHeuresTeleTravailParSemaine();
     }
 
     public char getTypeEmploye() {
         return typeEmploye;
     }
 
-    private void setTypeEmploye() {
-        if (noEmploye >= AppConfig.CODE_REF_TYPE_EMPLOYE 
-                && noEmploye < AppConfig.CODE_REF_TYPE_EMPLOYE_CATEGORIE) {
-            typeEmploye = AppConfig.EMPLOYE_PRODUCTION;
-        } else if(noEmploye > AppConfig.CODE_REF_TYPE_EMPLOYE_CATEGORIE) {
-            typeEmploye = AppConfig.EMPLOYE_EXPLOITATION;
+    private void setTypeEmploye() throws IOException {
+        if ((noEmploye
+                >= AppConfig.getParametreRetournerUnDouble(
+                    "CODE_REF_TYPE_EMPLOYE")) && (noEmploye
+                        < AppConfig.getParametreRetournerUnDouble(
+                            "CODE_REF_TYPE_EMPLOYE_CATEGORIE"))) {
+            typeEmploye =
+                AppConfig.getParametreRetournerUnInt("EMPLOYE_PRODUCTION");
+        } else if (noEmploye
+                   > AppConfig.getParametreRetournerUnDouble(
+                       "CODE_REF_TYPE_EMPLOYE_CATEGORIE")) {
+            typeEmploye =
+                AppConfig.getParametreRetournerUnInt("EMPLOYE_EXPLOITATION");
         } else {
-            typeEmploye = AppConfig.EMPLOYE_ADMINISTRATION;
+            typeEmploye =
+                AppConfig.getParametreRetournerUnInt("EMPLOYE_ADMINISTRATION");
         }
     }
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

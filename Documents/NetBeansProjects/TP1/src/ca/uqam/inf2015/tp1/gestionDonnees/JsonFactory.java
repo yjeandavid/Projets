@@ -1,28 +1,41 @@
 package ca.uqam.inf2015.tp1.gestionDonnees;
 
-import java.io.FileWriter;
-import java.io.IOException;
+
 import net.sf.json.JSONArray;
 
 
-public abstract class JsonFactory {
+import java.io.FileWriter;
+import java.io.IOException;
 
-    public static void buildJsonFile(String filePath, String messages) throws IOException {
-        JSONArray messageArray = new JSONArray();
-        String theMessages[] = messages.split(",");
-        
-        if(!(theMessages.length == 1 && theMessages[0].equals("")))
-            for (int i = 0; i < theMessages.length; ++i) {
-                String aMessage = theMessages[i];
-                messageArray.add(aMessage);
+public abstract class JsonFactory {
+    public static void construireFichierJson(String cheminDuFichier, String messages) throws IOException {
+        JSONArray tableDeMessages = new JSONArray();
+        String[]  lesMessages     = messages.split(",");
+
+        if (!((lesMessages.length == 1) && lesMessages[0].equals(""))) {
+            for (int i = 0; i < lesMessages.length; ++i) {
+                String aMessage = lesMessages[i];
+
+                tableDeMessages.add(aMessage);
             }
-        WriterJsonFile(filePath, messageArray);
+        }
+
+        EcrireFichierJson(cheminDuFichier, tableDeMessages);
     }
 
-    private static void WriterJsonFile(String filePath, JSONArray messageArray) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw = (FileWriter) messageArray.write(fw);
-        fw.flush();
-        fw.close();
+    public static void EcrireFichierJson(String cheminDuFichier, JSONArray messageArray) throws IOException {
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter(cheminDuFichier);
+            fw = (FileWriter) messageArray.write(fw);
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            fw.flush();
+            fw.close();
+        }
     }
 }
+
+
