@@ -28,7 +28,7 @@ public abstract class Validation {
     }
     
     public abstract String validerFeuilleDeTemps() throws IOException;
-    public abstract String validerSemaine();
-    public abstract String validerJoursOuvrables();
-    public abstract String validerFinDeSemaine();
+    public abstract String validerSemaine() throws IOException;
+    public abstract String validerJoursOuvrables() throws IOException;
+    public abstract String validerFinDeSemaine() throws IOException;
 }

@@ -25,18 +25,28 @@ public class ValidationEmployeNormal extends Validation {
     }
 
     @Override
-    public String validerSemaine() {
+    public String validerSemaine() throws IOException{
         String message = "";
         
         message += validerJoursOuvrables() + ',';
         message += validerFinDeSemaine() + ',';
+        
+        if (heuresDeBureauParSemaine < minimum_minutes_par_semaine) {
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_SEMAINE_BUREAU") + ',';
+        } else if (heuresDeBureauParSemaine > maximum_minutes_par_semaine) {
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_BUREAU_SEMAINE") + ',';
+        }
         
         return message;
     }
     
     @Override
     public String validerJoursOuvrables() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String message = "";
+        
+        
+        
+        return message;
     }
 
     @Override
