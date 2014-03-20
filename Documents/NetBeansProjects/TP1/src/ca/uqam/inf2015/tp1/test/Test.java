@@ -11,6 +11,7 @@ public class Test {
         int nombreCas = 18;
 
         for (int cas = 1; cas <= nombreCas; cas++) {
+            System.out.println("Cas " + cas);
             Inf2015Projet1.main(new String[] {
                 "configurationTests/Cas" + cas + ".json",
                 "resultatsTests/out" + cas + ".json" });
