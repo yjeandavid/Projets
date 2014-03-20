@@ -14,27 +14,6 @@ public class Employe {
         setTypeEmploye();
     }
 
-    /*public String validerFeuilleDeTemps() throws IOException {
-        String messages          = validerFeuilleDeTempsSelonType();
-        String messageValidation = "";
-        String theMessages[]     = messages.split(",");
-
-        for (int i = 0; i < theMessages.length; ++i) {
-            String aMessage = theMessages[i];
-
-            if (!aMessage.isEmpty()) {
-                messageValidation += aMessage + ',';
-            }
-        }
-
-        if (!messageValidation.isEmpty()) {
-            messageValidation = messageValidation.substring(0,
-                    messageValidation.length() - 1);
-        }
-
-        return messageValidation;
-    }*/
-
     public int getNoEmplye() {
         return noEmploye;
     }

@@ -35,7 +35,7 @@ public class ValidationEmployeNormal extends Validation {
         message += validerFinDeSemaine() + ',';
         
         if (heuresDeBureauParSemaine < minimum_minutes_par_semaine) {
-            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_SEMAINE_BUREAU") + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_SEMAINE") + ',';
         } else if (heuresDeBureauParSemaine > maximum_minutes_par_semaine) {
             message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_BUREAU_SEMAINE") + ',';
         }
@@ -53,12 +53,11 @@ public class ValidationEmployeNormal extends Validation {
             double heureBureauJour = FeuilleDeTemps.calculerHeuresBureauJour(projectList);
 
             if (heureBureauJour < minimum_minutes_par_jour) {
-                message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_JOUR_BUREAU") + " "
-                            + AppConfig.getParametreRetournerUnString("CLE_JOUR") + " " 
+                message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_JOUR_BUREAU")
                             + String.valueOf(numeroJour + 1) + ',';
             } else if (heureBureauJour > maximum_minutes_par_jour) {
                 if (heureBureauJour > 1920) {
-                    message += AppConfig.getParametreRetournerUnString("MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS") + " "
+                    message += AppConfig.getParametreRetournerUnString("MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS")
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
                     message += validerJourOuvrable(projectList, numeroJour+1) + ',';

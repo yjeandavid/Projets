@@ -30,11 +30,11 @@
   "EMPLOYE_EXPLOITATION":"E",
   "EMPLOYE_DEVELOPPEMENT":"P",
   
-  "MSG_HEURES_MINIMUM_JOUR_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal pour",
-  "MSG_HEURES_MINIMUM_SEMAINE_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
+  "MSG_HEURES_MINIMUM_JOUR_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal pour le jour ",
+  "MSG_HEURES_MINIMUM_BUREAU_SEMAINE": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
   
-  "MSG_HEURES_MAXIMAL_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine.",
-  "MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS": "L'employe a depasse le nombre d'heures au bureau pour jour",
+  "MSG_HEURES_MAXIMAL_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine",
+  "MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS": "L'employe a depasse le nombre d'heures au bureau pour jour ",
   "MSG_HEURES_MAXIMAL_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",
   "MSG_HEURES_CONGES_MALADIE": "L'employe n'a pas respecte le nombre d'heures du conge maladie permis",
   "MSG_AUTRE_ACTIVITE_CONGES_MALADIE_PARENTAL": "L'employe a exerce d'autre activite le jour du conge maladie ou parental",
