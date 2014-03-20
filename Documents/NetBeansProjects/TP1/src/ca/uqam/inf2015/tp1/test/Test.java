@@ -14,7 +14,7 @@ public class Test {
             System.out.println("Cas " + cas);
             Inf2015Projet1.main(new String[] {
                 "configurationTests/Cas" + cas + ".json",
-                "resultatsTests/out" + cas + ".json" });
+                "resultatsTests/out2_" + cas + ".json" });
         }
     }
 }
