@@ -64,7 +64,7 @@ public abstract class Inf2015Projet1 {
         for (int i = 0; i < employes.size(); ++i) {
             Employe anEmployee = employes.get(i);
 
-            messageValidation += anEmployee.validerFeuilleDeTemps();
+            //messageValidation += anEmployee.validerFeuilleDeTemps();
         }
 
         return messageValidation;

@@ -28,7 +28,7 @@
   "EMPLOYE_ADMINISTRATION":  "A",
   "EMPLOYE_DIRECTEUR": "D",
   "EMPLOYE_EXPLOITATION":"E",
-  "EMPLOYE_PRODUCTION":"P",
+  "EMPLOYE_DEVELOPPEMENT":"P",
   
   "MSG_HEURES_MINIMUM_JOUR_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal pour",
   "MSG_HEURES_MINIMUM_SEMAINE_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",

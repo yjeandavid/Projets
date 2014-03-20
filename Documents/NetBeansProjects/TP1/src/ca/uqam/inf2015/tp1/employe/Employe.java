@@ -193,7 +193,7 @@ public class Employe {
         if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE")) {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_ADMINISTRATION");
         } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_CATEGORIE")) {
-            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_PRODUCTION");
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DEVELOPPEMENT");
         } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_DIRECTEUR")) {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_EXPLOITATION");
         } else {

@@ -93,7 +93,11 @@ public class ValidationEmployeNormal extends Validation {
 
     @Override
     public String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String message = "";
+        
+        
+        
+        return message;
     }
     
     
