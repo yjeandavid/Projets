@@ -68,7 +68,7 @@ public class FeuilleDeTemps {
         return heuresTeleTravailSemaine;
     }
 
-    private double calculerHeuresBureauJour(List<Projet> projetsDuJour)
+    public static double calculerHeuresBureauJour(List<Projet> projetsDuJour)
             throws IOException {
         double heuresBureauJour = 0.0;
 

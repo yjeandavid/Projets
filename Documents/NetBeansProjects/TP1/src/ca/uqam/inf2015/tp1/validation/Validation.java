@@ -2,7 +2,9 @@ package ca.uqam.inf2015.tp1.validation;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
+import ca.uqam.inf2015.tp1.feuilleDeTemps.Projet;
 import java.io.IOException;
+import java.util.List;
 
 public abstract class Validation {
     protected FeuilleDeTemps feuilleDeTemps = null;
@@ -31,4 +33,6 @@ public abstract class Validation {
     public abstract String validerSemaine() throws IOException;
     public abstract String validerJoursOuvrables() throws IOException;
     public abstract String validerFinDeSemaine() throws IOException;
+    public abstract String validerJourOuvrable(List<Projet> projetsDuJour) throws IOException;
+    public abstract String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException;
 }

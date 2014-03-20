@@ -1,7 +1,9 @@
 package ca.uqam.inf2015.tp1.validation;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.feuilleDeTemps.Projet;
 import java.io.IOException;
+import java.util.List;
 
 public class ValidationEmployeDirection extends Validation {
     protected double maximum_minutes_tele_travail_semaine;
@@ -35,6 +37,16 @@ public class ValidationEmployeDirection extends Validation {
 
     @Override
     public String validerFinDeSemaine() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String validerJourOuvrable(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
