@@ -41,12 +41,47 @@ public class ValidationEmployeDirection extends Validation {
     }
 
     @Override
-    public String validerJourOuvrable(List<Projet> projetsDuJour) throws IOException {
+    public String validerJourOuvrable(List<Projet> projetsDuJour, int i) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException {
+    public String validerJourFinDeSemaine(List<Projet> projetsDuJour, int i) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String validerProjet(Projet unProjet, int i) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientTravailBureau(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientTeleTravail(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientCongeFerie(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientCongeMaladie(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientCongeVacances(List<Projet> projetsDuJour) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean contientCongeParental(List<Projet> projetsDuJour) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
