@@ -83,4 +83,13 @@ public class Projet {
         return isCongeVacance;
     }
 
+    public boolean estUnCongeParental() throws IOException {
+        boolean isCongeParental = false;
+        
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_PARENTAL")) {
+            isCongeParental = true;
+        }
+        
+        return isCongeParental;
+    }
 }

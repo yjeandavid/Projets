@@ -33,6 +33,13 @@ public abstract class Validation {
     public abstract String validerSemaine() throws IOException;
     public abstract String validerJoursOuvrables() throws IOException;
     public abstract String validerFinDeSemaine() throws IOException;
-    public abstract String validerJourOuvrable(List<Projet> projetsDuJour) throws IOException;
-    public abstract String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException;
+    public abstract String validerJourOuvrable(List<Projet> projetsDuJour, int i) throws IOException;
+    public abstract String validerJourFinDeSemaine(List<Projet> projetsDuJour, int i) throws IOException;
+    public abstract String validerProjet(Projet unProjet, int i) throws IOException;
+    public abstract boolean contientTravailBureau(List<Projet> projetsDuJour) throws IOException;
+    public abstract boolean contientTeleTravail(List<Projet> projetsDuJour) throws IOException;
+    public abstract boolean contientCongeFerie(List<Projet> projetsDuJour) throws IOException;
+    public abstract boolean contientCongeMaladie(List<Projet> projetsDuJour) throws IOException;
+    public abstract boolean contientCongeVacances(List<Projet> projetsDuJour) throws IOException;
+    public abstract boolean contientCongeParental(List<Projet> projetsDuJour) throws IOException;
 }
