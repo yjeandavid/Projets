@@ -17,7 +17,7 @@ public class FeuilleDeTemps {
         this.jours = jours;
     }
 
-    public String validerJoursOuvrables(double minimumHeuresBureauParJour,
+    /*public String validerJoursOuvrables(double minimumHeuresBureauParJour,
             double maximumHeuresBureauParJour)
             throws IOException {
         String messageValidation = "";
@@ -41,7 +41,7 @@ public class FeuilleDeTemps {
         }
 
         return messageValidation;
-    }
+    }*/
 
     public double calculerHeuresBureauParSemaine() throws IOException {
         double heuresBureauSemaine = 0.0;
