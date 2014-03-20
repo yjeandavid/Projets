@@ -95,7 +95,13 @@ public class ValidationEmployeNormal extends Validation {
     public String validerJourFinDeSemaine(List<Projet> projetDuJour) throws IOException {
         String message = "";
         
-        
+        for (int i = 0; i < projetDuJour.size(); ++i) {
+            Projet unProjet = projetDuJour.get(i);
+            
+            if (unProjet.estJourneeVacance()) {
+                message += ',';
+            }
+        }
         
         return message;
     }
