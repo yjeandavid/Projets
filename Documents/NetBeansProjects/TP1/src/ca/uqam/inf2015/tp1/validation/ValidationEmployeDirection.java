@@ -14,7 +14,7 @@ public class ValidationEmployeDirection extends Validation {
         this.feuilleDeTemps = feuilleDeTemps;
         minimum_minutes_par_semaine = min_par_semaine;
         maximum_minutes_tele_travail_semaine =  max_tele_travail;
-        minimum_minutes_par_jour = AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PAR_JOUR");
+        minimum_minutes_par_jour = AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR");
         maximum_minutes_par_semaine = AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE");
         setHeuresDeBureauParSemaine();
         setHeuresDeTeleTravailParSemaine();
@@ -66,6 +66,9 @@ public class ValidationEmployeDirection extends Validation {
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
                     message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+                } else {
+                    message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_TRAVAIL_PAR_JOUR")
+                                + String.valueOf(numeroJour + 1) + ',';
                 }
             } else {
                 message += validerJourOuvrable(projectList, numeroJour+1);
@@ -92,7 +95,6 @@ public class ValidationEmployeDirection extends Validation {
     @Override
     public String validerJourOuvrable(List<Projet> projetsDuJour, int i) throws IOException {
         String message = "";
-        double heureBureauJour = FeuilleDeTemps.calculerHeuresBureauJour(projetsDuJour);
         boolean disposeTravailBureau, disposeTeleTravail, disposeCongesFerie, disposeCongesMaladie;
         boolean disposeCongesVacances, disposeCongesParental;
         
@@ -119,41 +121,41 @@ public class ValidationEmployeDirection extends Validation {
 
     @Override
     public String validerJourFinDeSemaine(List<Projet> projetsDuJour, int i) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String message = "";
+        
+        for (int j = 0; j < projetsDuJour.size(); ++j) {
+            Projet unProjet = projetsDuJour.get(j);
+            
+            if (unProjet.estJourneeVacance()) {
+                message += AppConfig.getParametreRetournerUnString("MSG_JOURNEE_VACANCE_FIN_DE_SEMAINE") + i + ',';
+            } else if (unProjet.estUnCongeFerie()) {
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGES_FERIE_FIN_DE_SEMAINE") + i + ',';
+            } else if (unProjet.estUnCongeMaladie()) {
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGES_MALADIE_FIN_DE_SEMAINE") + i + ',';
+            }
+        }
+        
+        return message;
     }
 
     @Override
     public String validerProjet(Projet unProjet, int i) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientTravailBureau(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientTeleTravail(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientCongeFerie(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientCongeMaladie(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientCongeVacances(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contientCongeParental(List<Projet> projetsDuJour) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String message = "";
+        
+        if (unProjet.estJourneeVacance() 
+                && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_VACANCES")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_JOURNEE_VACANCE_FIN_DE_SEMAINE") + i + ',';
+        } else if (unProjet.estUnCongeFerie()
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_FERIES")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_CONGES_FERIES_FIN_DE_SEMAINE") + i + ',';
+        } else if (unProjet.estUnCongeMaladie()
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_MALADIE")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_CONGES_MALADIE_FIN_DE_SEMAINE") + i + ',';
+        } else if (unProjet.estUnCongeParental()
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_PARENTAL")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_CONGES_PARENTAL_FIN_DE_SEMAINE") + i + ',';
+        }
+        
+        return message;
     }
 }

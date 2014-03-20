@@ -33,6 +33,7 @@
   "MSG_HEURES_MINIMUM_JOUR_BUREAU": "L'employe n'a pas travaille le nombre d'heures minimal pour le jour ",
   "MSG_HEURES_MINIMUM_BUREAU_SEMAINE": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
   
+  "MSG_HEURES_MAXIMAL_TRAVAIL_PAR_JOUR": "L'employe a fait plus de 24h mais moins de 32h pour le jour ",
   "MSG_HEURES_MAXIMAL_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine",
   "MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS": "L'employe a depasse le nombre d'heures au bureau pour jour ",
   "MSG_HEURES_MAXIMAL_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",

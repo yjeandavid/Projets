@@ -22,12 +22,12 @@ public abstract class ValidationFactory{
             validation = new ValidationEmployeNormal(
                             unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_EXPLOITATION_PAR_SEMAINE"));
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE"));
         } else {
             validation = new ValidationEmployeNormal(
                             unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_SEMAINE"));
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE"));
         }
         
         return validation;

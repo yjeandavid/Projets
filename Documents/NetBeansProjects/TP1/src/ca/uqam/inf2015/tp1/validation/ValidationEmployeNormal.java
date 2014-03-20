@@ -61,6 +61,9 @@ public class ValidationEmployeNormal extends Validation {
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
                     message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+                } else {
+                    message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_TRAVAIL_PAR_JOUR")
+                                + String.valueOf(numeroJour + 1) + ',';
                 }
             } else {
                 message += validerJourOuvrable(projectList, numeroJour+1);
@@ -87,7 +90,6 @@ public class ValidationEmployeNormal extends Validation {
     @Override
     public String validerJourOuvrable(List<Projet> projetsDuJour, int i) throws IOException {
         String message = "";
-        double heureBureauJour = FeuilleDeTemps.calculerHeuresBureauJour(projetsDuJour);
         boolean disposeTravailBureau, disposeTeleTravail, disposeCongesFerie, disposeCongesMaladie;
         boolean disposeCongesVacances, disposeCongesParental;
         
@@ -140,7 +142,7 @@ public class ValidationEmployeNormal extends Validation {
             message += AppConfig.getParametreRetournerUnString("MSG_JOURNEE_VACANCE_FIN_DE_SEMAINE") + i + ',';
         } else if (unProjet.estUnCongeFerie()
                     && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_FERIES")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_CONGES_FERIES_FIN_DE_SEMAINE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_CONGES_FERIE_FIN_DE_SEMAINE") + i + ',';
         } else if (unProjet.estUnCongeMaladie()
                     && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_MALADIE")) {
             message += AppConfig.getParametreRetournerUnString("MSG_CONGES_MALADIE_FIN_DE_SEMAINE") + i + ',';
@@ -151,90 +153,4 @@ public class ValidationEmployeNormal extends Validation {
         
         return message;
     }
-    
-    @Override
-    public boolean contientTravailBureau(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estTravailBureau()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-
-    @Override
-    public boolean contientTeleTravail(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estTeleTravail()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-
-    @Override
-    public boolean contientCongeFerie(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estUnCongeFerie()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-
-    @Override
-    public boolean contientCongeMaladie(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estUnCongeMaladie()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-
-    @Override
-    public boolean contientCongeVacances(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estJourneeVacance()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-
-    @Override
-    public boolean contientCongeParental(List<Projet> projetsDuJour) throws IOException {
-        boolean resultat = false;
-        
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
-            Projet unProjet = projetsDuJour.get(i);
-            if (unProjet.estUnCongeParental()) {
-                resultat = true;
-            }
-        }
-        
-        return resultat;
-    }
-    
-    
 }
