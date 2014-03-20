@@ -1,26 +1,31 @@
 package ca.uqam.inf2015.tp1.validation;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.employe.Employe;
 import java.io.IOException;
 
 public abstract class ValidationFactory{
-    public static Validation construireValidationEmploye(char typeEmploye) throws IOException {
+    public static Validation construireValidationEmploye(Employe unEmploye) throws IOException {
         Validation validation;
         
-        if (typeEmploye == 'A') {
+        if (unEmploye.getTypeEmploye() == 'A') {
             validation = new ValidationEmployeDirection(
+                            unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"),
                             AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE"));
-        } else if (typeEmploye == 'D') {
+        } else if (unEmploye.getTypeEmploye() == 'D') {
             validation = new ValidationEmployeDirection(
+                            unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"),
                             Double.MAX_VALUE);
-        } else if (typeEmploye == 'E') {
+        } else if (unEmploye.getTypeEmploye() == 'E') {
             validation = new ValidationEmployeNormal(
+                            unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_EXPLOITATION_PAR_SEMAINE"));
         } else {
             validation = new ValidationEmployeNormal(
+                            unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_SEMAINE"));
         }

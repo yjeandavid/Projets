@@ -1,17 +1,14 @@
 package ca.uqam.inf2015.tp1.application;
 
-
 import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
 import ca.uqam.inf2015.tp1.exceptions.MissingArgumentsException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.gestionDonnees.JsonFactory;
-
+import ca.uqam.inf2015.tp1.validation.Validation;
+import ca.uqam.inf2015.tp1.validation.ValidationFactory;
 import net.sf.json.JSONArray;
-
-
 import java.io.IOException;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,8 +60,8 @@ public abstract class Inf2015Projet1 {
 
         for (int i = 0; i < employes.size(); ++i) {
             Employe anEmployee = employes.get(i);
-
-            //messageValidation += anEmployee.validerFeuilleDeTemps();
+            Validation validation = ValidationFactory.construireValidationEmploye(anEmployee);
+            messageValidation += validation.validerFeuilleDeTemps();
         }
 
         return messageValidation;
