@@ -14,19 +14,20 @@ public class Employe {
         setTypeEmploye();
     }
 
-    public int getNoEmplye() {
+    public int getNoEmploye() {
         return noEmploye;
     }
 
-    public void setNoEmploye(int noEmploye) {
+    public void setNoEmploye(int noEmploye) throws IOException {
         this.noEmploye = noEmploye;
+        setTypeEmploye();
     }
 
     public FeuilleDeTemps getFeuilleDeTemps() {
         return feuileDeTemps;
     }
 
-    public void setfFeuilleDeTemps(FeuilleDeTemps timeSheet) {
+    public void setFeuilleDeTemps(FeuilleDeTemps timeSheet) {
         this.feuileDeTemps = timeSheet;
     }
 
@@ -39,7 +40,7 @@ public class Employe {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_ADMINISTRATION");
         } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_CATEGORIE")) {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DEVELOPPEMENT");
-        } else if (noEmploye < AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_DIRECTEUR")) {
+        } else if (noEmploye <= AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_DIRECTEUR")) {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_EXPLOITATION");
         } else {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DIRECTEUR");

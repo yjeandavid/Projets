@@ -52,7 +52,7 @@ public abstract class EmployeFactory {
         FeuilleDeTemps timeSheet = new FeuilleDeTemps();
 
         timeSheet.setJours(ProjectFactory.construireProjetAPartirDeFichierJson(elementDeRacine));
-        employe.setfFeuilleDeTemps(timeSheet);
+        employe.setFeuilleDeTemps(timeSheet);
 
         return employe;
     }

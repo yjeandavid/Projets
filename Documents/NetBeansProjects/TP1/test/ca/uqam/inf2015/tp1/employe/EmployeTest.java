@@ -9,14 +9,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 public class EmployeTest {
+    Employe instance;
     
     public EmployeTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws IOException {
+        AppConfig.chargerParametres();
     }
     
     @AfterClass
@@ -24,68 +27,90 @@ public class EmployeTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
+        instance = new Employe(100);
     }
     
     @After
     public void tearDown() {
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testGetNoEmplye1() throws Exception{
+    /**
+     * Pour lancer ce test il faut retirer le code dans @BeforeClass et dans @Before
+     * @throws Exception 
+     */
+    /*@Test(expected = NullPointerException.class)
+    public void testGetNoEmploye1() throws Exception{
         System.out.println("getNoEmplye");
-        Employe instance = new Employe(100);
-    }
+        instance = new Employe(100);
+    }*/
 
     @Test
-    public void testGetNoEmplye2() throws IOException {
+    public void testGetNoEmploye2() throws IOException {
         System.out.println("getNoEmplye");
         AppConfig.chargerParametres();
-        Employe instance = new Employe(100);
         int expResult = 100;
-        int result = instance.getNoEmplye();
+        int result = instance.getNoEmploye();
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testSetNoEmploye() {
+    public void testSetNoEmploye() throws IOException {
         System.out.println("setNoEmploye");
-        int noEmploye = 0;
-        Employe instance = null;
+        AppConfig.chargerParametres();
+        int noEmploye = 300;
         instance.setNoEmploye(noEmploye);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(noEmploye, instance.getNoEmploye());
     }
 
     @Test
-    public void testGetFeuilleDeTemps() {
+    public void testGetFeuilleDeTemps() throws IOException {
         System.out.println("getFeuilleDeTemps");
-        Employe instance = null;
         FeuilleDeTemps expResult = null;
         FeuilleDeTemps result = instance.getFeuilleDeTemps();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     @Test
-    public void testSetfFeuilleDeTemps() {
+    public void testSetFeuilleDeTemps() throws IOException {
         System.out.println("setfFeuilleDeTemps");
         FeuilleDeTemps timeSheet = null;
-        Employe instance = null;
-        instance.setfFeuilleDeTemps(timeSheet);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setFeuilleDeTemps(timeSheet);
+        FeuilleDeTemps expResult = null;
+        FeuilleDeTemps result = instance.getFeuilleDeTemps();
+        assertEquals(expResult, result);
+        
+        timeSheet = new FeuilleDeTemps();
+        instance.setFeuilleDeTemps(timeSheet);
+        expResult = timeSheet;
+        result = instance.getFeuilleDeTemps();
+        assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetTypeEmploye() {
+    public void testGetTypeEmploye() throws IOException {
         System.out.println("getTypeEmploye");
-        Employe instance = null;
-        char expResult = ' ';
+        char expResult = 'A';
         char result = instance.getTypeEmploye();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.setNoEmploye(1000);
+        expResult = 'P';
+        result = instance.getTypeEmploye();
+        assertEquals(expResult, result);
+        
+        instance.setNoEmploye(2000);
+        expResult = 'E';
+        result = instance.getTypeEmploye();
+        assertEquals(expResult, result);
+        
+        instance.setNoEmploye(5000);
+        result = instance.getTypeEmploye();
+        assertEquals(expResult, result);
+        
+        instance.setNoEmploye(5001);
+        expResult = 'D';
+        result = instance.getTypeEmploye();
+        assertEquals(expResult, result);
     }
 }
