@@ -46,7 +46,7 @@ public class Projet {
         boolean isTeleTravail = false;
 
         if (AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") < noProjet
-                && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_PARENTAL")) {
+                && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_PARENTAL")) {
             isTeleTravail = true;
         }
 
@@ -56,7 +56,7 @@ public class Projet {
     public boolean estUnCongeMaladie() throws IOException {
         boolean isCongeMaladie = false;
         
-        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_MALADIE")) {
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_MALADIE")) {
             isCongeMaladie = true;
         }
         
@@ -66,7 +66,7 @@ public class Projet {
     public boolean estUnCongeFerie() throws IOException {
         boolean isCongeFerie = false;
         
-        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_FERIES")) {
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_FERIE")) {
             isCongeFerie = true;
         }
         
@@ -76,7 +76,7 @@ public class Projet {
     public boolean estJourneeVacance() throws IOException {
         boolean isCongeVacance = false;
         
-        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_VACANCES")) {
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_VACANCE")) {
             isCongeVacance = true;
         }
         
@@ -86,7 +86,7 @@ public class Projet {
     public boolean estUnCongeParental() throws IOException {
         boolean isCongeParental = false;
         
-        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGES_PARENTAL")) {
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_PARENTAL")) {
             isCongeParental = true;
         }
         

@@ -37,7 +37,7 @@ public class ValidationEmployeNormal extends Validation {
         if (heuresDeBureauParSemaine < minimum_minutes_par_semaine) {
             message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_SEMAINE") + ',';
         } else if (heuresDeBureauParSemaine > maximum_minutes_par_semaine) {
-            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_BUREAU_SEMAINE") + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_BUREAU_SEMAINE") + ',';
         }
         
         return message;
@@ -57,12 +57,12 @@ public class ValidationEmployeNormal extends Validation {
                             + String.valueOf(numeroJour + 1) + ',';
             } else if (heureBureauJour > maximum_minutes_par_jour) {
                 if (heureBureauJour > 1920) {
-                    message += AppConfig.getParametreRetournerUnString("MSG_MAXIMUM_HEURE_DE_BUREAU_PAR_JOURS")
+                    message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_BUREAU_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
                     message += validerJourOuvrable(projectList, numeroJour+1) + ',';
                 } else {
-                    message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMAL_TRAVAIL_PAR_JOUR")
+                    message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_TRAVAIL_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 }
             } else {
@@ -106,9 +106,9 @@ public class ValidationEmployeNormal extends Validation {
         }
         
         if (disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances)) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_FERIE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
         } else if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_MALADIE") + ' ' + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
         } 
         
         return message;
@@ -122,13 +122,13 @@ public class ValidationEmployeNormal extends Validation {
             Projet unProjet = projetsDuJour.get(j);
             
             if (unProjet.estJourneeVacance()) {
-                message += AppConfig.getParametreRetournerUnString("MSG_JOURNEE_VACANCE_FIN_DE_SEMAINE") + i + ',';
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGE_VACANCE_FIN_DE_SEMAINE") + i + ',';
             } else if (unProjet.estUnCongeFerie()) {
-                message += AppConfig.getParametreRetournerUnString("MSG_CONGES_FERIE_FIN_DE_SEMAINE") + i + ',';
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGE_FERIE_FIN_DE_SEMAINE") + i + ',';
             } else if (unProjet.estUnCongeMaladie()) {
-                message += AppConfig.getParametreRetournerUnString("MSG_CONGES_MALADIE_FIN_DE_SEMAINE") + i + ',';
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGE_MALADIE_FIN_DE_SEMAINE") + i + ',';
             } else if (unProjet.estUnCongeParental()) {
-                message += AppConfig.getParametreRetournerUnString("MSG_CONGES_PARENTAL_FIN_DE_SEMAINE") + i + ',';
+                message += AppConfig.getParametreRetournerUnString("MSG_CONGE_PARENTAL_FIN_DE_SEMAINE") + i + ',';
             }
         }
         
@@ -140,17 +140,17 @@ public class ValidationEmployeNormal extends Validation {
         String message = "";
         
         if (unProjet.estJourneeVacance() 
-                && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_VACANCES")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_FERIE") + i + ',';
+                && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_VACANCE")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
         } else if (unProjet.estUnCongeFerie()
-                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_FERIES")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_FERIE") + i + ',';
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_FERIE")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
         } else if (unProjet.estUnCongeMaladie()
-                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_MALADIE")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_MALADIE") + i + ',';
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_MALADIE")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
         } else if (unProjet.estUnCongeParental()
-                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGES_PARENTAL")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGES_MALADIE") + i + ',';
+                    && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_PARENTAL")) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
         }
         
         return message;

@@ -16,7 +16,7 @@ public abstract class Validation {
     protected double maximum_minutes_par_semaine;
     
     protected Validation() throws IOException {
-        maximum_minutes_par_jour = AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_OFFICE_WORK_BY_DAY");
+        maximum_minutes_par_jour = AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_PAR_JOUR");
     }
     
     protected void setHeuresDeBureauParSemaine() throws IOException {
