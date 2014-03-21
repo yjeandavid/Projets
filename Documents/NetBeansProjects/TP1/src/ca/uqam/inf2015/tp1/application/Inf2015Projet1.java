@@ -2,6 +2,7 @@ package ca.uqam.inf2015.tp1.application;
 
 import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
+import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import ca.uqam.inf2015.tp1.exceptions.MissingArgumentsException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.gestionDonnees.JsonFactory;
@@ -21,7 +22,8 @@ public abstract class Inf2015Projet1 {
             initilisationApplication(args);
             messgeValidation = executerApplication(args[0]);
             genererResultat(messgeValidation, args[1]);
-        } catch (MissingArgumentsException | IOException | MissingDataInJSONFileException ex) {
+        } catch (MissingArgumentsException | IOException | MissingDataInJSONFileException 
+                    | InvalidProjectMinutesException ex) {
             gererException(ex);
 
             try {
@@ -47,7 +49,8 @@ public abstract class Inf2015Projet1 {
         AppConfig.chargerParametres();
     }
 
-    private static String executerApplication(String jsonFile) throws MissingDataInJSONFileException, IOException {
+    private static String executerApplication(String jsonFile) throws MissingDataInJSONFileException, IOException,
+                                                                      InvalidProjectMinutesException {
         List<Employe> employes;
 
         employes = EmployeFactory.construireEmployeAPartirDeFichierJson(jsonFile);
@@ -80,6 +83,10 @@ public abstract class Inf2015Projet1 {
             MissingDataInJSONFileException MDJFe = (MissingDataInJSONFileException) e;
 
             MDJFe.souleverException();
+        } else if (e instanceof InvalidProjectMinutesException) {
+            InvalidProjectMinutesException IPMe = (InvalidProjectMinutesException) e;
+            
+            IPMe.souleverException();
         } else {
             Logger.getLogger(Inf2015Projet1.class.getName()).log(Level.SEVERE, null, e);
         }

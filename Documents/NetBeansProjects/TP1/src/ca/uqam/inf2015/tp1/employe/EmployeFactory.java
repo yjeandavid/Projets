@@ -2,6 +2,7 @@ package ca.uqam.inf2015.tp1.employe;
 
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.ProjectFactory;
@@ -24,7 +25,7 @@ public abstract class EmployeFactory {
     private static JSONObject elementDeRacine;
 
     public static List<Employe> construireEmployeAPartirDeFichierJson(String filePath)
-            throws MissingDataInJSONFileException, IOException {
+            throws MissingDataInJSONFileException, IOException, InvalidProjectMinutesException {
         List<Employe> employes;
 
         initialisation(filePath);
@@ -38,7 +39,8 @@ public abstract class EmployeFactory {
                 StandardCharsets.UTF_8));
     }
 
-    private static List<Employe> analyserFichierJson() throws IOException, MissingDataInJSONFileException {
+    private static List<Employe> analyserFichierJson() throws IOException, MissingDataInJSONFileException,
+                                                              InvalidProjectMinutesException {
         List<Employe> employes = new ArrayList<>();
 
         employes.add(
@@ -47,7 +49,8 @@ public abstract class EmployeFactory {
         return employes;
     }
 
-    private static Employe construireEmploye(int noEmploye) throws MissingDataInJSONFileException, IOException {
+    private static Employe construireEmploye(int noEmploye) throws MissingDataInJSONFileException, IOException,
+                                                                   InvalidProjectMinutesException {
         Employe        employe   = new Employe(noEmploye);
         FeuilleDeTemps timeSheet = new FeuilleDeTemps();
 

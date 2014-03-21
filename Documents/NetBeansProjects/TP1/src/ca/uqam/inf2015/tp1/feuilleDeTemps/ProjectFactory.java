@@ -2,6 +2,7 @@ package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 
 import net.sf.json.JSONArray;
@@ -20,7 +21,7 @@ public abstract class ProjectFactory {
     private static final short NB_DAYS_WEEK  = 5;
 
     public static List<List<Projet>> construireProjetAPartirDeFichierJson(JSONObject rootElt)
-            throws MissingDataInJSONFileException, IOException {
+            throws MissingDataInJSONFileException, IOException, InvalidProjectMinutesException {
         List<Projet>       projets;
         List<List<Projet>> jours = new ArrayList<>();
 
@@ -44,7 +45,8 @@ public abstract class ProjectFactory {
         return jours;
     }
 
-    private static List<Projet> construireProjet(JSONArray jourElt) throws IOException {
+    private static List<Projet> construireProjet(JSONArray jourElt) throws IOException, 
+                                                                           InvalidProjectMinutesException {
         @SuppressWarnings("unchecked") Iterator<JSONObject> iterator = jourElt.iterator();
         List<Projet>                                        projets  = new ArrayList<>();
 
