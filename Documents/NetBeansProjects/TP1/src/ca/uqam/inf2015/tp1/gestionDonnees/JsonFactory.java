@@ -12,12 +12,14 @@ public abstract class JsonFactory {
         JSONArray tableDeMessages = new JSONArray();
         String[]  lesMessages     = messages.split(",");
 
-        if (!((lesMessages.length == 1) && lesMessages[0].equals(""))) {
+        if (!(lesMessages.length == 1)) {
             for (int i = 0; i < lesMessages.length; ++i) {
-                String aMessage = lesMessages[i];
-
-                tableDeMessages.add(aMessage);
+                if (!lesMessages[i].isEmpty()) {
+                    tableDeMessages.add(lesMessages[i]);
+                }
             }
+        } else if (!lesMessages[0].isEmpty()) {
+            tableDeMessages.add(lesMessages[0]);
         }
 
         EcrireFichierJson(cheminDuFichier, tableDeMessages);
