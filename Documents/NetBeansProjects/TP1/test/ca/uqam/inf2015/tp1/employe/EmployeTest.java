@@ -22,19 +22,11 @@ public class EmployeTest {
         AppConfig.chargerParametres();
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() throws IOException {
         instance = new Employe(100);
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Pour lancer ce test il faut retirer le code dans @BeforeClass et dans @Before
      * @throws Exception 
@@ -73,7 +65,7 @@ public class EmployeTest {
 
     @Test
     public void testSetFeuilleDeTemps() throws IOException {
-        System.out.println("setfFeuilleDeTemps");
+        System.out.println("setFeuilleDeTemps");
         FeuilleDeTemps timeSheet = null;
         instance.setFeuilleDeTemps(timeSheet);
         FeuilleDeTemps expResult = null;

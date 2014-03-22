@@ -21,18 +21,6 @@ public class FeuilleDeTempsTest {
         AppConfig.chargerParametres();
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     @Test
     public void testGetJours() {
         System.out.println("getJours");

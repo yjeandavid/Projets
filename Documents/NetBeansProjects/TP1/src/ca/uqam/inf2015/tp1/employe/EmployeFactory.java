@@ -2,6 +2,7 @@ package ca.uqam.inf2015.tp1.employe;
 
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
+import ca.uqam.inf2015.tp1.exceptions.InvalidDayProjectsException;
 import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
@@ -25,7 +26,9 @@ public abstract class EmployeFactory {
     private static JSONObject elementDeRacine;
 
     public static List<Employe> construireEmployeAPartirDeFichierJson(String filePath)
-            throws MissingDataInJSONFileException, IOException, InvalidProjectMinutesException {
+                                                        throws MissingDataInJSONFileException, IOException,
+                                                               InvalidProjectMinutesException,
+                                                               InvalidDayProjectsException {
         List<Employe> employes;
 
         initialisation(filePath);
@@ -40,7 +43,8 @@ public abstract class EmployeFactory {
     }
 
     private static List<Employe> analyserFichierJson() throws IOException, MissingDataInJSONFileException,
-                                                              InvalidProjectMinutesException {
+                                                              InvalidProjectMinutesException,
+                                                              InvalidDayProjectsException  {
         List<Employe> employes = new ArrayList<>();
 
         employes.add(
@@ -50,7 +54,8 @@ public abstract class EmployeFactory {
     }
 
     private static Employe construireEmploye(int noEmploye) throws MissingDataInJSONFileException, IOException,
-                                                                   InvalidProjectMinutesException {
+                                                                   InvalidProjectMinutesException, 
+                                                                   InvalidDayProjectsException {
         Employe        employe   = new Employe(noEmploye);
         FeuilleDeTemps timeSheet = new FeuilleDeTemps();
 

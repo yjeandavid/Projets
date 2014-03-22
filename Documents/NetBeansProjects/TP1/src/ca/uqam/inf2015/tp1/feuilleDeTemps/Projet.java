@@ -46,11 +46,16 @@ public class Projet {
         return isTravailBureau;
     }
     
+    public boolean equals(Projet autreProjet) {
+        return noProjet == autreProjet.getNoProjet();
+    }
+    
     public boolean estTeleTravail() throws IOException {
         boolean isTeleTravail = false;
 
-        if (AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") < noProjet
-                && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_PARENTAL")) {
+        if ((AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL") < noProjet
+                && noProjet < AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_PARENTAL"))
+            || noProjet > AppConfig.getParametreRetournerUnDouble("CODE_REF_CONGE_MALADIE")) {
             isTeleTravail = true;
         }
 
