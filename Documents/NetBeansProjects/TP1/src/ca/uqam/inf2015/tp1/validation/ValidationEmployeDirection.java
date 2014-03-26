@@ -9,13 +9,14 @@ import java.util.List;
 public class ValidationEmployeDirection extends Validation {
     protected double maximum_minutes_tele_travail_semaine;
     
-    public ValidationEmployeDirection(FeuilleDeTemps feuilleDeTemps, double min_par_semaine, double max_tele_travail) throws IOException {
+    public ValidationEmployeDirection(FeuilleDeTemps feuilleDeTemps, double min_par_semaine, double max_tele_travail,
+                                      double min_par_jour, double max_par_semaine) throws IOException {
         super();
         this.feuilleDeTemps = feuilleDeTemps;
         minimum_minutes_par_semaine = min_par_semaine;
         maximum_minutes_tele_travail_semaine =  max_tele_travail;
-        minimum_minutes_par_jour = AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR");
-        maximum_minutes_par_semaine = AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE");
+        minimum_minutes_par_jour = min_par_jour;
+        maximum_minutes_par_semaine = max_par_semaine;
         setHeuresDeBureauParSemaine();
         setHeuresDeTeleTravailParSemaine();
     }
@@ -56,22 +57,21 @@ public class ValidationEmployeDirection extends Validation {
         for (int numeroJour = 0; numeroJour < 5; ++numeroJour) {
             List<Projet> projectList = jours.get(numeroJour);
             double heureBureauJour = FeuilleDeTemps.calculerHeuresBureauJour(projectList);
-
+            message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+            
             if (heureBureauJour < minimum_minutes_par_jour) {
-                message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_JOUR_BUREAU")
+                message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_JOUR")
                             + String.valueOf(numeroJour + 1) + ',';
             } else if (heureBureauJour > maximum_minutes_par_jour) {
                 if (heureBureauJour > 1920) {
                     message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_BUREAU_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
-                    message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+                    message += validerJournee32h(projectList, numeroJour+1) + ',';
                 } else {
                     message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_TRAVAIL_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 }
-            } else {
-                message += validerJourOuvrable(projectList, numeroJour+1);
             }
         }
         return message;
@@ -110,15 +110,30 @@ public class ValidationEmployeDirection extends Validation {
             message += validerProjet(unProjet, i);
         }
         
-        if (disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances)) {
+        if ((disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances))
+                || ((disposeCongesFerie || disposeCongesVacances) && (disposeCongesMaladie || disposeCongesParental))) {
             message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
-        } else if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
+        } 
+        if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
             message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
         } 
         
         return message;
     }
 
+    @Override
+    public String validerJournee32h(List<Projet> projetsDuJour, int i) throws IOException {
+        String message = "";
+        
+        if (!contientCongeFerie(projetsDuJour) || !contientCongeVacances(projetsDuJour)) {
+           message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_32") + ',';
+        } else if (!contientTeleTravail(projetsDuJour) || !contientTravailBureau(projetsDuJour)) {
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_32") + ',';
+        }
+        
+        return message;
+    }
+    
     @Override
     public String validerJourFinDeSemaine(List<Projet> projetsDuJour, int i) throws IOException {
         String message = "";
@@ -146,16 +161,16 @@ public class ValidationEmployeDirection extends Validation {
         
         if (unProjet.estJourneeVacance() 
                 && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_VACANCE")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_CONGE_VACANCE") + i + ',';
         } else if (unProjet.estUnCongeFerie()
                     && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_FERIE")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_CONGE_FERIE") + i + ',';
         } else if (unProjet.estUnCongeMaladie()
                     && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_MALADIE")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_CONGE_MALADIE") + i + ',';
         } else if (unProjet.estUnCongeParental()
                     && unProjet.getMinutes() != AppConfig.getParametreRetournerUnDouble("MINUTES_CONGE_PARENTAL")) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_CONGE_PARENTAL") + i + ',';
         }
         
         return message;

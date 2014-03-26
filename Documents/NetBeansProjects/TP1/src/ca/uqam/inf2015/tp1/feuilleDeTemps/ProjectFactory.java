@@ -54,7 +54,7 @@ public abstract class ProjectFactory {
             Projet unProjet = Projet.construireProjet(
                                         projectElt.getInt(AppConfig.getParametreRetournerUnString("CLE_PROJET")),
                                     projectElt.getDouble(AppConfig.getParametreRetournerUnString("CLE_MINUTES")));
-            if (!projets.contains(unProjet)) {
+            if (!existePremierDansSecond(unProjet,projets)) {
                 projets.add(unProjet);
             } else {
                 throw new InvalidDayProjectsException();
@@ -62,6 +62,21 @@ public abstract class ProjectFactory {
         }
 
         return projets;
+    }
+    
+    private static boolean existePremierDansSecond(Projet unProjet, List<Projet> projets) {
+        boolean resultat = false;
+        
+        if (projets.size() > 0) {
+            for (int i = 0; i < projets.size(); ++i) {
+                Projet autreProjet = projets.get(i);
+                if (autreProjet.equals(unProjet)) {
+                    resultat = true;
+                }
+            }
+        }
+        
+        return resultat;
     }
 }
 

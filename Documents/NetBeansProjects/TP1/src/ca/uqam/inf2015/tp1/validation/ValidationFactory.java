@@ -12,11 +12,15 @@ public abstract class ValidationFactory{
             validation = new ValidationEmployeDirection(
                             unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"),
-                            AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE"));
+                            AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE"),
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR"),
+                            AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"));
         } else if (unEmploye.getTypeEmploye() == 'D') {
             validation = new ValidationEmployeDirection(
                             unEmploye.getFeuilleDeTemps(),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"),
+                            Double.MAX_VALUE,
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
                             Double.MAX_VALUE);
         } else if (unEmploye.getTypeEmploye() == 'E') {
             validation = new ValidationEmployeNormal(

@@ -48,7 +48,7 @@ public class FeuilleDeTemps {
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet aProject = projetsDuJour.get(j);
 
-            if (aProject.estTravailBureau()) {
+            if (!aProject.estTeleTravail()) {
                 heuresBureauJour += (projetsDuJour.get(j)).getMinutes();
             }
         }

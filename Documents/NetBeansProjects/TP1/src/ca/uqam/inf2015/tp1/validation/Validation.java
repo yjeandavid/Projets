@@ -36,6 +36,7 @@ public abstract class Validation {
     protected abstract String validerJourOuvrable(List<Projet> projetsDuJour, int i) throws IOException;
     protected abstract String validerJourFinDeSemaine(List<Projet> projetsDuJour, int i) throws IOException;
     protected abstract String validerProjet(Projet unProjet, int i) throws IOException;
+    protected abstract String validerJournee32h(List<Projet> projetsDuJour, int i) throws IOException;
     
     protected boolean contientTravailBureau(List<Projet> projetsDuJour) throws IOException {
         boolean resultat = false;

@@ -8,9 +8,9 @@ public class Test {
     public static void main(String[] args) {
         System.out.println("Début test!");
 
-        int nombreCas = 18;
+        int nombreCas = 52;
 
-        for (int cas = 1; cas <= nombreCas; cas++) {
+        for (int cas = 29; cas <= nombreCas; cas++) {
             System.out.println("Cas " + cas);
             Inf2015Projet1.main(new String[] {
                 "configurationTests/Cas" + cas + ".json",

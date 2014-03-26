@@ -35,17 +35,18 @@
   "MSG_HEURES_MINIMUM_BUREAU_SEMAINE": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
   
   "MSG_HEURES_MAXIMUM_TRAVAIL_PAR_JOUR": "L'employe a fait plus de 24h mais moins de 32h pour le jour ",
-  "MSG_HEURES_MAXIMUM_BUREAU_PAR_JOUR": "L'employe a depasse le nombre d'heures au bureau pour le jour ",
+  "MSG_HEURES_MAXIMUM_BUREAU_PAR_JOUR": "L'employe a depasse le nombre d'heures maximum au bureau pour le jour ",
   "MSG_HEURES_MAXIMUM_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine",
   "MSG_HEURES_MAXIMUM_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",
+  "MSG_HEURES_MAXIMUM_32": "L'employe n'a pas respecte les restrictions pour les journées de 32h pour le jour ",
   
   "MSG_HEURES_CONGE_MALADIE": "L'employe n'a pas respecte le nombre d'heures du conge maladie permis le jour ",
-  "MSG_HEURES_CONGE_FERIE": "L'employe n'a pas respecte le nombre d'heures permis du conge ferie",
-  "MSG_HEURES_CONGE_VACANCE": "L'employe n'a pas respecte le nombre d'heures de vacance pour la journee ",
-  "MSG_HEURES_CONGE_PARENTAL": "L'employe n'a pas respecte le nombre d'heures permis du conge parental",
+  "MSG_HEURES_CONGE_FERIE": "L'employe n'a pas respecte le nombre d'heures permis du conge ferie le jour ",
+  "MSG_HEURES_CONGE_VACANCE": "L'employe n'a pas respecte le nombre d'heures de vacance pour le jour ",
+  "MSG_HEURES_CONGE_PARENTAL": "L'employe n'a pas respecte le nombre d'heures permis du conge parental pour le jour ",
   
-  "MSG_AUTRE_ACTIVITE_CONGE_MALADIE": "L'employe a exerce d'autre activite pendant conge maladie ou parental le jour ",
-  "MSG_AUTRE_ACTIVITE_CONGE_FERIE": "L'employe a exerce d'autre d'activite pendant conge ferie ou vacance le jour ",
+  "MSG_AUTRE_ACTIVITE_CONGE_MALADIE": "L'employe a exerce d'autres activites pendant conge maladie ou parental le jour ",
+  "MSG_AUTRE_ACTIVITE_CONGE_FERIE": "L'employe a exerce d'autres activites pendant conge ferie ou vacance le jour ",
   
   "MSG_CONGE_MALADIE_FIN_DE_SEMAINE": "L'employe n'a pas droit au conge maladie pour le weekend ",
   "MSG_CONGE_FERIE_FIN_DE_SEMAINE": "L'employe n'a pas droit au conge ferie pour le weekend ",
