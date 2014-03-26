@@ -8,11 +8,11 @@ import java.util.List;
 
 public class ValidationEmployeNormal extends Validation {
     
-    public ValidationEmployeNormal(FeuilleDeTemps feuilleDeTemps, double min_par_jour, double min_par_semaine) throws IOException {
+    public ValidationEmployeNormal(FeuilleDeTemps feuilleDeTemps, double min_par_semaine) throws IOException {
         super();
         this.feuilleDeTemps = feuilleDeTemps;
-        minimum_minutes_par_jour = min_par_jour;
         minimum_minutes_par_semaine = min_par_semaine;
+        minimum_minutes_par_jour=AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR");
         maximum_minutes_par_semaine=AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE");
         setHeuresDeBureauParSemaine();
         setHeuresDeTeleTravailParSemaine();

@@ -16,21 +16,16 @@ public abstract class ValidationFactory{
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR"),
                             AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"));
         } else if (unEmploye.getTypeEmploye() == 'D') {
-            validation = new ValidationEmployeDirection(
+            validation = new ValidationEmployeNormal(
                             unEmploye.getFeuilleDeTemps(),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"),
-                            Double.MAX_VALUE,
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
-                            Double.MAX_VALUE);
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"));
         } else if (unEmploye.getTypeEmploye() == 'E') {
             validation = new ValidationEmployeNormal(
                             unEmploye.getFeuilleDeTemps(),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE"));
         } else {
             validation = new ValidationEmployeNormal(
                             unEmploye.getFeuilleDeTemps(),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR"),
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE"));
         }
         
