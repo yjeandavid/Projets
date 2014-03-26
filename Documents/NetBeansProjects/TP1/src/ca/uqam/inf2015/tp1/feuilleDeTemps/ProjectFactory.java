@@ -2,9 +2,7 @@ package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
-import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
-import ca.uqam.inf2015.tp1.exceptions.InvalidDayProjectsException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
@@ -18,8 +16,7 @@ public abstract class ProjectFactory {
     private static final short NB_DAYS_WEEK  = 5;
 
     public static List<List<Projet>> construireProjetAPartirDeFichierJson(JSONObject rootElt)
-                                throws MissingDataInJSONFileException, IOException, 
-                                       InvalidProjectMinutesException, InvalidDayProjectsException {
+                                throws MissingDataInJSONFileException, IOException {
         List<Projet>       projets;
         List<List<Projet>> jours = new ArrayList<>();
 
@@ -43,40 +40,20 @@ public abstract class ProjectFactory {
         return jours;
     }
 
-    private static List<Projet> construireProjet(JSONArray jourElt) throws IOException, 
-                                                                           InvalidProjectMinutesException,
-                                                                           InvalidDayProjectsException {
+    private static List<Projet> construireProjet(JSONArray jourElt) throws IOException {
         @SuppressWarnings("unchecked") Iterator<JSONObject> iterator = jourElt.iterator();
         List<Projet>                                        projets  = new ArrayList<>();
 
         while (iterator.hasNext()) {
             JSONObject projectElt = iterator.next();
-            Projet unProjet = Projet.construireProjet(
-                                        projectElt.getInt(AppConfig.getParametreRetournerUnString("CLE_PROJET")),
-                                    projectElt.getDouble(AppConfig.getParametreRetournerUnString("CLE_MINUTES")));
-            if (!existePremierDansSecond(unProjet,projets)) {
-                projets.add(unProjet);
-            } else {
-                throw new InvalidDayProjectsException();
-            }
+            
+            projets.add(
+                Projet.construireProjet(
+                    projectElt.getInt(AppConfig.getParametreRetournerUnString("CLE_PROJET")),
+                    projectElt.getDouble(AppConfig.getParametreRetournerUnString("CLE_MINUTES"))));
         }
 
         return projets;
-    }
-    
-    private static boolean existePremierDansSecond(Projet unProjet, List<Projet> projets) {
-        boolean resultat = false;
-        
-        if (projets.size() > 0) {
-            for (int i = 0; i < projets.size(); ++i) {
-                Projet autreProjet = projets.get(i);
-                if (autreProjet.equals(unProjet)) {
-                    resultat = true;
-                }
-            }
-        }
-        
-        return resultat;
     }
 }
 

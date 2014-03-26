@@ -8,6 +8,7 @@ import java.util.List;
 
 public abstract class Validation {
     protected FeuilleDeTemps feuilleDeTemps = null;
+    protected int nbreCongeParental = 0;
     protected double heuresDeBureauParSemaine = 0.0;
     protected double heuresTeleTravailParSemaine = 0.0;
     protected double minimum_minutes_par_jour;
@@ -106,10 +107,27 @@ public abstract class Validation {
     protected boolean contientCongeParental(List<Projet> projetsDuJour) throws IOException {
         boolean resultat = false;
         
-        for (int i = 0; (i < projetsDuJour.size() && !resultat); ++i) {
+        for (int i = 0; i < projetsDuJour.size(); ++i) {
             Projet unProjet = projetsDuJour.get(i);
             if (unProjet.estUnCongeParental()) {
                 resultat = true;
+                ++nbreCongeParental;
+            }
+        }
+        
+        return resultat;
+    }
+    
+    protected boolean contientMemeCodeProjetDans(List<Projet> projetsDuJour) throws IOException {
+        boolean resultat = false;
+        
+        for (int i = 0; (i < projetsDuJour.size()-2 && !resultat); ++i) {
+            Projet projet1 = projetsDuJour.get(i);
+            for (int j = i+1; (j < projetsDuJour.size() && !resultat); ++j) {
+                Projet projet2 = projetsDuJour.get(j);
+                if (projet1.equals(projet2)) {
+                    resultat = true;
+                }
             }
         }
         

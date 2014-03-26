@@ -1,7 +1,6 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
-import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,31 +19,18 @@ public class ProjetTest {
         AppConfig.chargerParametres();
     }
    
-    @Test(expected = InvalidProjectMinutesException.class)
-    public void testConstruireProjet1() throws Exception {
+    @Test
+    public void testConstruireProjet() {
         System.out.println("construireProjet");
         int noProjet = 110;
         double minutes = 0.0;
         Projet result = null;
         result = Projet.construireProjet(noProjet, minutes);
-        
-        minutes = 300.0;
-        result = Projet.construireProjet(noProjet, minutes);
         assertNotNull(result);
     }
 
     @Test
-    public void testConstruireProjet2() throws Exception {
-        System.out.println("construireProjet");
-        int noProjet = 110;
-        double minutes = 3000.0;
-        Projet result = null;
-        result = Projet.construireProjet(noProjet, minutes);
-        assertNotNull(result);
-    }
-
-    @Test
-    public void testGetNoProjet() throws InvalidProjectMinutesException {
+    public void testGetNoProjet() {
         System.out.println("getNoProjet");
         Projet instance = Projet.construireProjet(110, 300.0);
         int expResult = 110;
@@ -53,7 +39,7 @@ public class ProjetTest {
     }
 
     @Test
-    public void testGetMinutes() throws InvalidProjectMinutesException {
+    public void testGetMinutes() {
         System.out.println("getMinutes");
         Projet instance = Projet.construireProjet(110, 300.0);
         double expResult = 300.0;

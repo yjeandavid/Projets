@@ -40,6 +40,10 @@
   "MSG_HEURES_MAXIMUM_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",
   "MSG_HEURES_MAXIMUM_32": "L'employe n'a pas respecte les restrictions pour les journées de 32h pour le jour ",
   
+  "MSG_0_MINUTES_NON_PERMIS": "Il n'est pas permis d'avoir une activité avec 0 minute ",  
+  "MSG_MEME_NUMERO_DE_PROJET":"Il n'est pas permis d'avoir plusieurs activités avec le même code de projet pour ",
+  "MSG_ABUS_CONGE_PARENTAL": "L'employe a pris plus d'un conge parental durant la semaine",
+  
   "MSG_HEURES_CONGE_MALADIE": "L'employe n'a pas respecte le nombre d'heures du conge maladie permis le jour ",
   "MSG_HEURES_CONGE_FERIE": "L'employe n'a pas respecte le nombre d'heures permis du conge ferie le jour ",
   "MSG_HEURES_CONGE_VACANCE": "L'employe n'a pas respecte le nombre d'heures de vacance pour le jour ",

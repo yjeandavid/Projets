@@ -34,6 +34,10 @@ public class ValidationEmployeNormal extends Validation {
         message += validerJoursOuvrables() + ',';
         message += validerFinDeSemaine() + ',';
         
+        if (nbreCongeParental > 1) {
+            message += AppConfig.getParametreRetournerUnString("MSG_ABUS_CONGE_PARENTAL") + ',';
+        }
+        
         if (heuresDeBureauParSemaine < minimum_minutes_par_semaine) {
             message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_SEMAINE") + ',';
         } else if (heuresDeBureauParSemaine > maximum_minutes_par_semaine) {
@@ -51,7 +55,8 @@ public class ValidationEmployeNormal extends Validation {
         for (int numeroJour = 0; numeroJour < 5; ++numeroJour) {
             List<Projet> projectList = jours.get(numeroJour);
             double heureBureauJour = FeuilleDeTemps.calculerHeuresBureauJour(projectList);
-
+            message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+            
             if (heureBureauJour < minimum_minutes_par_jour) {
                 message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_JOUR")
                             + String.valueOf(numeroJour + 1) + ',';
@@ -60,13 +65,11 @@ public class ValidationEmployeNormal extends Validation {
                     message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_BUREAU_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 } else if (heureBureauJour == 1920) {
-                    message += validerJourOuvrable(projectList, numeroJour+1) + ',';
+                    message += validerJournee32h(projectList, numeroJour+1) + ',';
                 } else {
                     message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_TRAVAIL_PAR_JOUR")
                                 + String.valueOf(numeroJour + 1) + ',';
                 }
-            } else {
-                message += validerJourOuvrable(projectList, numeroJour+1);
             }
         }
         return message;
@@ -102,14 +105,22 @@ public class ValidationEmployeNormal extends Validation {
         
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet unProjet = projetsDuJour.get(j);
+            if (unProjet.getMinutes() == 0) {
+                message += AppConfig.getParametreRetournerUnString("MSG_0_MINUTES_NON_PERMIS") + "jour " + i + ',';
+            }
             message += validerProjet(unProjet, i);
         }
         
-        if (disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances)) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
-        } else if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
+        if (contientMemeCodeProjetDans(projetsDuJour)) {
+            message += AppConfig.getParametreRetournerUnString("MSG_MEME_NUMERO_DE_PROJET") + "jour "+ i + ',';
+        }
+        
+        if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
             message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
-        } 
+        } else if ((disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances))
+                || ((disposeCongesFerie || disposeCongesVacances) && (disposeCongesMaladie || disposeCongesParental))) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
+        }
         
         return message;
     }
@@ -121,6 +132,16 @@ public class ValidationEmployeNormal extends Validation {
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet unProjet = projetsDuJour.get(j);
             
+            if (unProjet.getMinutes() == 0) {
+                message += AppConfig.getParametreRetournerUnString("MSG_0_MINUTES_NON_PERMIS") + "weekend " + i + ',';
+            }
+            
+            message += validerProjet(unProjet, i);
+                
+            if (contientMemeCodeProjetDans(projetsDuJour)) {
+                message += AppConfig.getParametreRetournerUnString("MSG_MEME_NUMERO_DE_PROJET") + "weekend "+ i + ',';
+            }
+        
             if (unProjet.estJourneeVacance()) {
                 message += AppConfig.getParametreRetournerUnString("MSG_CONGE_VACANCE_FIN_DE_SEMAINE") + i + ',';
             } else if (unProjet.estUnCongeFerie()) {

@@ -37,6 +37,10 @@ public class ValidationEmployeDirection extends Validation {
         message += validerJoursOuvrables() + ',';
         message += validerFinDeSemaine() + ',';
         
+        if (nbreCongeParental > 1) {
+            message += AppConfig.getParametreRetournerUnString("MSG_ABUS_CONGE_PARENTAL") + ',';
+        }
+        
         if (heuresDeBureauParSemaine < minimum_minutes_par_semaine) {
             message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MINIMUM_BUREAU_SEMAINE") + ',';
         } else if (heuresDeBureauParSemaine > maximum_minutes_par_semaine) {
@@ -107,16 +111,22 @@ public class ValidationEmployeDirection extends Validation {
         
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet unProjet = projetsDuJour.get(j);
+            if (unProjet.getMinutes() == 0) {
+                message += AppConfig.getParametreRetournerUnString("MSG_0_MINUTES_NON_PERMIS") + "jour " + i + ',';
+            }
             message += validerProjet(unProjet, i);
         }
         
-        if ((disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances))
-                || ((disposeCongesFerie || disposeCongesVacances) && (disposeCongesMaladie || disposeCongesParental))) {
-            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
-        } 
+        if (contientMemeCodeProjetDans(projetsDuJour)) {
+            message += AppConfig.getParametreRetournerUnString("MSG_MEME_NUMERO_DE_PROJET") + "jour "+ i + ',';
+        }
+        
         if ((disposeCongesMaladie || disposeCongesParental) && (disposeTeleTravail || disposeTravailBureau)) {
             message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_MALADIE") + i + ',';
-        } 
+        } else if ((disposeTravailBureau && disposeTeleTravail && (disposeCongesFerie || disposeCongesVacances))
+                || ((disposeCongesFerie || disposeCongesVacances) && (disposeCongesMaladie || disposeCongesParental))) {
+            message += AppConfig.getParametreRetournerUnString("MSG_AUTRE_ACTIVITE_CONGE_FERIE") + i + ',';
+        }
         
         return message;
     }
@@ -141,6 +151,16 @@ public class ValidationEmployeDirection extends Validation {
         for (int j = 0; j < projetsDuJour.size(); ++j) {
             Projet unProjet = projetsDuJour.get(j);
             
+            if (unProjet.getMinutes() == 0) {
+                message += AppConfig.getParametreRetournerUnString("MSG_0_MINUTES_NON_PERMIS") + "weekend " + i + ',';
+            }
+            
+            message += validerProjet(unProjet, i);
+                
+            if (contientMemeCodeProjetDans(projetsDuJour)) {
+                message += AppConfig.getParametreRetournerUnString("MSG_MEME_NUMERO_DE_PROJET") + "weekend "+ i + ',';
+            }
+        
             if (unProjet.estJourneeVacance()) {
                 message += AppConfig.getParametreRetournerUnString("MSG_CONGE_VACANCE_FIN_DE_SEMAINE") + i + ',';
             } else if (unProjet.estUnCongeFerie()) {

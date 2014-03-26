@@ -1,7 +1,6 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
 import ca.uqam.inf2015.tp1.application.AppConfig;
-import ca.uqam.inf2015.tp1.exceptions.InvalidProjectMinutesException;
 import java.io.IOException;
 
 public class Projet {
@@ -13,10 +12,7 @@ public class Projet {
         setMinutes(minutes);
     }
 
-    public static Projet construireProjet(int noProjet, double minutes) throws InvalidProjectMinutesException {
-        if (minutes == 0.0) {
-            throw new InvalidProjectMinutesException();
-        }
+    public static Projet construireProjet(int noProjet, double minutes) {
         return new Projet(noProjet, minutes);
     }
 
