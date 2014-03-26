@@ -121,7 +121,7 @@ public abstract class Validation {
     protected boolean contientMemeCodeProjetDans(List<Projet> projetsDuJour) throws IOException {
         boolean resultat = false;
         
-        for (int i = 0; (i < projetsDuJour.size()-2 && !resultat); ++i) {
+        for (int i = 0; (i <= projetsDuJour.size()-2 && !resultat); ++i) {
             Projet projet1 = projetsDuJour.get(i);
             for (int j = i+1; (j < projetsDuJour.size() && !resultat); ++j) {
                 Projet projet2 = projetsDuJour.get(j);

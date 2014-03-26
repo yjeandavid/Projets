@@ -10,7 +10,7 @@ public class Test {
 
         int nombreCas = 52;
 
-        for (int cas = 29; cas <= nombreCas; cas++) {
+        for (int cas = 1; cas <= nombreCas; cas++) {
             System.out.println("Cas " + cas);
             Inf2015Projet1.main(new String[] {
                 "configurationTests/Cas" + cas + ".json",
