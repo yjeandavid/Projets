@@ -1,9 +1,6 @@
 package ca.uqam.inf2015.tp1.gestionDonnees;
 
-
 import net.sf.json.JSONArray;
-
-
 import java.io.FileWriter;
 import java.io.IOException;
 

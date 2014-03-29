@@ -1,12 +1,8 @@
 package ca.uqam.inf2015.tp1.application;
 
-
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-
 import org.apache.commons.io.FileUtils;
-
-
 import java.io.File;
 import java.io.IOException;
 

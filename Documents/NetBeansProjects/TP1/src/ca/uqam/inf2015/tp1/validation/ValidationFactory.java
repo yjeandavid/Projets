@@ -9,23 +9,26 @@ public abstract class ValidationFactory{
         Validation validation;
         
         if (unEmploye.getTypeEmploye() == 'A') {
-            validation = new ValidationEmployeDirection(
-                            unEmploye.getFeuilleDeTemps(),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"),
-                            AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE"),
-                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR"),
+            validation = new Validation(unEmploye.getFeuilleDeTemps());
+            validation.setMinimum_minutes_par_semaine(
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"));
+            validation.setMaximum_minutes_tele_travail_semaine(
+                            AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE"));
+            validation.setMinimum_minutes_par_jour(
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR"));
+            validation.setMaximum_minutes_par_semaine(
                             AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE"));
         } else if (unEmploye.getTypeEmploye() == 'D') {
-            validation = new ValidationEmployeNormal(
-                            unEmploye.getFeuilleDeTemps(),
+            validation = new Validation(unEmploye.getFeuilleDeTemps());
+            validation.setMinimum_minutes_par_semaine(
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"));
         } else if (unEmploye.getTypeEmploye() == 'E') {
-            validation = new ValidationEmployeNormal(
-                            unEmploye.getFeuilleDeTemps(),
+            validation = new Validation(unEmploye.getFeuilleDeTemps());
+            validation.setMinimum_minutes_par_semaine(
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE"));
         } else {
-            validation = new ValidationEmployeNormal(
-                            unEmploye.getFeuilleDeTemps(),
+            validation = new Validation(unEmploye.getFeuilleDeTemps());
+            validation.setMinimum_minutes_par_semaine(
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE"));
         }
         
