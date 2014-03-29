@@ -4,13 +4,16 @@
   "CODE_REF_CONGE_FERIE": 998,
   "CODE_REF_CONGE_VACANCE": 997,
   "CODE_REF_CONGE_PARENTAL": 996,
+  "CODE_REF_TEMPS_TRANSPORT": 777,
   
   "CODE_REF_TYPE_EMPLOYE": 1000,
   "CODE_REF_TYPE_EMPLOYE_CATEGORIE": 2000,
   "CODE_REF_TYPE_EMPLOYE_DIRECTEUR": 5000,
+  "CODE_REF_TYPE_EMPLOYE_PRESIDENT": 6000,
   
   "MINIMUM_MINUTES_BUREAU_ADMIN_PAR_JOUR": 240,
   "MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR": 360,
+  "MINIMUM_MINUTES_BUREAU_DIRECTEUR_PAR_JOUR": 480,
   "MINIMUM_MINUTES_BUREAU_ADMIN_SEMAINE": 2250,
   "MINIMUM_MINUTES_BUREAU_PRODUCTION_SEMAINE": 2280,
   "MINIMUM_MINUTES_BUREAU_EXPLOITATION_SEMAINE": 2370,
@@ -20,6 +23,7 @@
   "MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE": 2580,
   "MAXIMUM_MINUTES_TELE_TRAVAIL_ADMIN_SEMAINE": 600,
   "MAXIMUM_MINUTES_BUREAU_ADMIN_SEMAINE": 2490,
+  "MAXIMUM_MINUTES_TEMPS_TRANSPORT_SEMAINE": 300,
   
   "MINUTES_CONGE_MALADIE": 480,
   "MINUTES_CONGE_FERIE": 480,
@@ -39,6 +43,9 @@
   "MSG_HEURES_MAXIMUM_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine",
   "MSG_HEURES_MAXIMUM_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",
   "MSG_HEURES_MAXIMUM_32": "L'employe n'a pas respecte les restrictions pour les journées de 32h pour le jour ",
+  "MSG_HEURES_MAXIMUM_TEMPS_TRANSPORT_SEMAINE": "L'employe a exede le temps maximum de transport par semaine",
+  
+  "MSG_TEMPS_TRANSPORT_INTERDIT": "L'employe n'a pas droit aux temps de transport ",
   
   "MSG_0_MINUTES_NON_PERMIS": "Il n'est pas permis d'avoir une activité avec 0 minute ",  
   "MSG_MEME_NUMERO_DE_PROJET":"Il n'est pas permis d'avoir plusieurs activités avec le même code de projet pour ",
