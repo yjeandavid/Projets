@@ -22,6 +22,9 @@ public abstract class ValidationFactory{
             validation = new Validation(unEmploye.getFeuilleDeTemps());
             validation.setMinimum_minutes_par_semaine(
                             AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_SEMAINE"));
+            validation.setMinimum_minutes_par_jour(
+                            AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_DIRECTEUR_PAR_JOUR"));
+            validation.setMaximum_minutes_par_semaine(Double.MAX_VALUE);
         } else if (unEmploye.getTypeEmploye() == 'E') {
             validation = new Validation(unEmploye.getFeuilleDeTemps());
             validation.setMinimum_minutes_par_semaine(
