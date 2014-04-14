@@ -34,6 +34,7 @@
   "EMPLOYE_DIRECTEUR": "D",
   "EMPLOYE_EXPLOITATION":"E",
   "EMPLOYE_DEVELOPPEMENT":"P",
+  "EMPLOYE_PRESIDENT":"C",
   
   "MSG_HEURES_MINIMUM_BUREAU_JOUR": "L'employe n'a pas travaille le nombre d'heures minimal pour le jour ",
   "MSG_HEURES_MINIMUM_BUREAU_SEMAINE": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
@@ -43,7 +44,7 @@
   "MSG_HEURES_MAXIMUM_BUREAU_SEMAINE": "L'employe a depasse le nombre d'heures au bureau par semaine",
   "MSG_HEURES_MAXIMUM_TELE_TRAVAIL": "L'employe a depasse le nombre d'heures de teletravail permis",
   "MSG_HEURES_MAXIMUM_32": "L'employe n'a pas respecte les restrictions pour les journées de 32h pour le jour ",
-  "MSG_HEURES_MAXIMUM_TEMPS_TRANSPORT_SEMAINE": "L'employe a exede le temps maximum de transport par semaine",
+  "MSG_HEURES_MAXIMUM_TEMPS_TRANSPORT_SEMAINE": "L'employe a excede le temps maximum de transport par semaine",
   
   "MSG_TEMPS_TRANSPORT_INTERDIT": "L'employe n'a pas droit aux temps de transport ",
   

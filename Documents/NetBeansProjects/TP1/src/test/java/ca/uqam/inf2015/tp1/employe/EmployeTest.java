@@ -3,13 +3,10 @@ package ca.uqam.inf2015.tp1.employe;
 import ca.uqam.inf2015.tp1.application.AppConfig;
 import ca.uqam.inf2015.tp1.feuilleDeTemps.FeuilleDeTemps;
 import java.io.IOException;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 
 public class EmployeTest {
     Employe instance;

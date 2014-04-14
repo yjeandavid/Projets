@@ -8,7 +8,7 @@ public class Test {
     public static void main(String[] args) {
         System.out.println("Début test!");
 
-        int nombreCas = 54;
+        int nombreCas = 60;
 
         for (int cas = 1; cas <= nombreCas; cas++) {
             System.out.println("Cas " + cas);

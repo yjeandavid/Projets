@@ -17,14 +17,17 @@ public class AppConfig {
     }
 
     public static double getParametreRetournerUnDouble(String parametreDemande) throws IOException {
+        if(configurations == null)chargerParametres();
         return (double) configurations.getInt(parametreDemande);
     }
 
     public static String getParametreRetournerUnString(String parametreDemande) throws IOException {
+        if(configurations == null)chargerParametres();
         return configurations.getString(parametreDemande);
     }
 
-    public static char getParametreRetournerUnChar(String parametreDemande) {
+    public static char getParametreRetournerUnChar(String parametreDemande) throws IOException {
+        if(configurations == null)chargerParametres();
         return configurations.getString(parametreDemande).charAt(0);
     }
 }

@@ -35,7 +35,8 @@ public class Projet {
     public boolean estTravailBureau() throws IOException {
         boolean isTravailBureau = false;
         
-        if (noProjet <= AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL")) {
+        if (noProjet <= AppConfig.getParametreRetournerUnDouble("CODE_REF_TELE_TRAVAIL")
+              && noProjet != AppConfig.getParametreRetournerUnDouble("CODE_REF_TEMPS_TRANSPORT")) {
             isTravailBureau = true;
         }
         
@@ -96,5 +97,15 @@ public class Projet {
         }
         
         return isCongeParental;
+    }
+    
+    public boolean estUnTempsTransport() throws IOException {
+        boolean isTempsTransport = false;
+        
+        if (noProjet == AppConfig.getParametreRetournerUnDouble("CODE_REF_TEMPS_TRANSPORT")) {
+            isTempsTransport = true;
+        }
+        
+        return isTempsTransport;
     }
 }

@@ -16,11 +16,14 @@ import net.sf.json.JSONException;
 
 public abstract class EmployeFactory {
     private static JSONObject elementDeRacine;
-
+    
+   
+    
+    
+    
     public static List<Employe> construireEmployeAPartirDeFichierJson(String filePath)
                                                         throws MissingDataInJSONFileException, IOException {
         List<Employe> employes;
-
         initialisation(filePath);
         employes = analyserFichierJson();
 

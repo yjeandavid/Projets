@@ -42,8 +42,10 @@ public class Employe {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DEVELOPPEMENT");
         } else if (noEmploye <= AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_DIRECTEUR")) {
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_EXPLOITATION");
-        } else {
+        } else if (noEmploye != AppConfig.getParametreRetournerUnDouble("CODE_REF_TYPE_EMPLOYE_PRESIDENT")){
             typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_DIRECTEUR");
+        } else {
+            typeEmploye = AppConfig.getParametreRetournerUnChar("EMPLOYE_PRESIDENT");
         }
     }
 }

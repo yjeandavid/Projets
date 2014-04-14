@@ -7,33 +7,55 @@ import java.io.IOException;
 import java.util.List;
 
 public class Validation {
-    protected FeuilleDeTemps feuilleDeTemps = null;
-    protected int nbreCongeParental = 0;
-    protected double heuresDeBureauParSemaine = 0.0;
-    protected double heuresTeleTravailParSemaine = 0.0;
-    protected double minimum_minutes_par_semaine;
-    protected double minimum_minutes_par_jour = 
-                                AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR");
-    protected double maximum_minutes_par_jour = 
-                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_PAR_JOUR");
-    protected double maximum_minutes_par_semaine = 
-                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE");
-    protected double maximum_minutes_tele_travail_semaine = Double.MAX_VALUE;
 
-    public Validation(FeuilleDeTemps feuilleDeTemps) throws IOException {
-        this.feuilleDeTemps = feuilleDeTemps;
+    
+    
+    private FeuilleDeTemps feuilleDeTemps = null;
+    private int nbreCongeParental = 0;
+    /* Valeurs pour appliquerCodeTransport
+     * -1: ne s'applique pas
+     *  0: s'applique et est considerer comme du temps de bureau
+     *  1: s'applique et est considerer comme du temps de tele-travail
+     */
+    private int appliquerCodeTransport = -1;
+    private double heuresDeTransportParSemaine = 0.0;
+    private double heuresDeBureauParSemaine = 0.0;
+    private double heuresTeleTravailParSemaine = 0.0;
+    private double minimum_minutes_par_semaine;
+    private double minimum_minutes_par_jour = 
+                                AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR");
+    private double maximum_minutes_par_jour = 
+                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_PAR_JOUR");
+    private double maximum_minutes_par_semaine = 
+                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE");
+    private double maximum_minutes_tele_travail_semaine = Double.MAX_VALUE;
+    private double maximum_minutes_temps_transport_semaine;
+
+    public Validation(FeuilleDeTemps feuilleDeTemp) throws IOException {       
+        this.feuilleDeTemps = feuilleDeTemp;
         setHeuresDeBureauParSemaine();
         setHeuresDeTeleTravailParSemaine();
+        setHeuresDeTransportParSemaine();
     }
-    
+
     private void setHeuresDeBureauParSemaine() throws IOException {
-        heuresDeBureauParSemaine =
-            feuilleDeTemps.calculerHeuresBureauParSemaine();
+        if (appliquerCodeTransport == 0) {
+            heuresDeBureauParSemaine = feuilleDeTemps.calculerHeuresBureauParSemaine();
+        } else {
+            heuresDeBureauParSemaine = feuilleDeTemps.calculerHeuresBureauParSemaineSansTransport();
+        }
     }
 
     private void setHeuresDeTeleTravailParSemaine() throws IOException {
-        heuresTeleTravailParSemaine =
-            feuilleDeTemps.calculerHeuresTeleTravailParSemaine();
+        if (appliquerCodeTransport == 1) {
+            heuresTeleTravailParSemaine = feuilleDeTemps.calculerHeuresTeleTravailParSemaineAvecTransport();
+        } else {
+            heuresTeleTravailParSemaine = feuilleDeTemps.calculerHeuresTeleTravailParSemaine();
+        }
+    }
+    
+    private void setHeuresDeTransportParSemaine() throws IOException {
+        heuresDeTransportParSemaine = feuilleDeTemps.calculerHeuresTempsTransportParSemaine();
     }
     
     public void setMinimum_minutes_par_jour(double minimum_minutes_par_jour) {
@@ -54,6 +76,60 @@ public class Validation {
     
     public void setMaximum_minutes_tele_travail_semaine(double maximum_minutes_tele_travail_semaine) {
         this.maximum_minutes_tele_travail_semaine = maximum_minutes_tele_travail_semaine;
+    }
+    
+    public void setMaximum_minutes_temps_transport_semaine(double maximum_minutes_temps_transport_semaine) {
+        this.maximum_minutes_temps_transport_semaine = maximum_minutes_temps_transport_semaine;
+    }
+    
+    public void setAppliquerCodeTransport(int appliquerCodeTransport) throws IOException {
+        this.appliquerCodeTransport = appliquerCodeTransport;
+        setHeuresDeBureauParSemaine();
+        setHeuresDeTeleTravailParSemaine();
+    }
+    
+    public int getNbreCongeParental() {
+        return nbreCongeParental;
+    }
+
+    public double getHeuresDeBureauParSemaine() {
+        return heuresDeBureauParSemaine;
+    }
+
+    public double getHeuresTeleTravailParSemaine() {
+        return heuresTeleTravailParSemaine;
+    }
+
+    public double getHeuresDeTransport() {
+        return heuresDeTransportParSemaine;
+    }
+    
+    public double getMinimum_minutes_par_semaine() {
+        return minimum_minutes_par_semaine;
+    }
+
+    public double getMinimum_minutes_par_jour() {
+        return minimum_minutes_par_jour;
+    }
+
+    public double getMaximum_minutes_par_jour() {
+        return maximum_minutes_par_jour;
+    }
+
+    public double getMaximum_minutes_par_semaine() {
+        return maximum_minutes_par_semaine;
+    }
+
+    public double getMaximum_minutes_tele_travail_semaine() {
+        return maximum_minutes_tele_travail_semaine;
+    }
+    
+    public double getMaximum_minutes_temps_transport_semaine() {
+        return maximum_minutes_temps_transport_semaine;
+    }
+    
+    public int getAppliquerCodeTransport() {
+        return appliquerCodeTransport;
     }
     
     public String validerFeuilleDeTemps() throws IOException {
@@ -81,6 +157,13 @@ public class Validation {
         }
         if (heuresTeleTravailParSemaine > maximum_minutes_tele_travail_semaine) {
             message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_TELE_TRAVAIL") + ',';
+        }
+        
+        if (appliquerCodeTransport == -1 && heuresDeTransportParSemaine > 0) {
+            message += AppConfig.getParametreRetournerUnString("MSG_TEMPS_TRANSPORT_INTERDIT") + ',';
+        } else if ((appliquerCodeTransport == 0 || appliquerCodeTransport == 1)
+                    && heuresDeTransportParSemaine > maximum_minutes_temps_transport_semaine) {
+            message += AppConfig.getParametreRetournerUnString("MSG_HEURES_MAXIMUM_TEMPS_TRANSPORT_SEMAINE") + ',';
         }
         
         return message;

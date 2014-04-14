@@ -18,6 +18,18 @@ public class ProjetTest {
     public static void setUpClass() throws IOException {
         AppConfig.chargerParametres();
     }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
    
     @Test
     public void testConstruireProjet() {
@@ -84,6 +96,12 @@ public class ProjetTest {
         expResult = false;
         result = instance.estTravailBureau();
         assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estTravailBureau();
+        assertEquals(expResult, result);
+    
     }
 
     @Test
@@ -123,6 +141,12 @@ public class ProjetTest {
         expResult = false;
         result = instance.estTeleTravail();
         assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estTeleTravail();
+        assertEquals(expResult, result);
+    
     }
 
     @Test
@@ -162,6 +186,12 @@ public class ProjetTest {
         expResult = false;
         result = instance.estUnCongeMaladie();
         assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estUnCongeMaladie();
+        assertEquals(expResult, result);
+    
     }
 
     @Test
@@ -201,6 +231,12 @@ public class ProjetTest {
         expResult = false;
         result = instance.estUnCongeFerie();
         assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estUnCongeFerie();
+        assertEquals(expResult, result);
+    
     }
 
     @Test
@@ -240,6 +276,12 @@ public class ProjetTest {
         expResult = false;
         result = instance.estJourneeVacance();
         assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estJourneeVacance();
+        assertEquals(expResult, result);
+    
     }
 
     @Test
@@ -278,6 +320,69 @@ public class ProjetTest {
         instance = Projet.construireProjet(996, 420.0);
         expResult = true;
         result = instance.estUnCongeParental();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = false;
+        result = instance.estUnCongeParental();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class Projet.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Projet autreProjet = Projet.construireProjet(111, 0);
+        Projet instance = Projet.construireProjet(110, 0);
+        boolean expResult = false;
+        boolean result = instance.equals(autreProjet);
+        assertEquals(expResult, result);
+        
+    }
+
+    @Test
+    public void testEstUnTempsTransport() throws Exception {
+        System.out.println("estUnTempsTransport");
+        Projet instance = Projet.construireProjet(902, 500.0);
+        boolean expResult = false;
+        boolean result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(125, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(999, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(990, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(998, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(997, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(996, 420.0);
+        expResult = false;
+        result = instance.estUnTempsTransport();
+        assertEquals(expResult, result);
+        
+        instance = Projet.construireProjet(777, 5.0);
+        expResult = true;
+        result = instance.estUnTempsTransport();
         assertEquals(expResult, result);
     }
 }
