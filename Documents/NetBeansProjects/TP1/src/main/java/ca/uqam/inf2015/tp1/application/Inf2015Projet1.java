@@ -4,9 +4,11 @@ import ca.uqam.inf2015.tp1.employe.Employe;
 import ca.uqam.inf2015.tp1.employe.EmployeFactory;
 import ca.uqam.inf2015.tp1.exceptions.MissingArgumentsException;
 import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
+import ca.uqam.inf2015.tp1.gestionDonnees.FileWriterWrapper;
 import ca.uqam.inf2015.tp1.gestionDonnees.JsonFactory;
 import ca.uqam.inf2015.tp1.validation.Validation;
 import ca.uqam.inf2015.tp1.validation.ValidationFactory;
+import java.io.FileWriter;
 import net.sf.json.JSONArray;
 import java.io.IOException;
 import java.util.List;
@@ -20,12 +22,12 @@ public abstract class Inf2015Projet1 {
         try {
             initilisationApplication(args);
             messgeValidation = executerApplication(args[0]);
-            genererResultat(messgeValidation, args[1]);
+            genererResultat(messgeValidation, new FileWriterWrapper(new FileWriter(args[1])));
         } catch (MissingArgumentsException | IOException | MissingDataInJSONFileException ex) {
             gererException(ex);
 
             try {
-                JsonFactory.EcrireFichierJson(args[1], new JSONArray());
+                JsonFactory.EcrireFichierJson(new JSONArray(), new FileWriterWrapper(new FileWriter(args[1])));
             } catch (IOException ex1) {
                 System.out.println(ex1.getMessage());
             }
@@ -67,8 +69,8 @@ public abstract class Inf2015Projet1 {
         return messageValidation;
     }
 
-    private static void genererResultat(String messageValidation, String fichierResultat) throws IOException {
-        JsonFactory.construireFichierJson(fichierResultat, messageValidation);
+    private static void genererResultat(String messageValidation, FileWriterWrapper fw) throws IOException {
+        JsonFactory.construireFichierJson( messageValidation, fw);
     }
 
     private static void gererException(Exception e) {

@@ -21,13 +21,10 @@ public class Validation {
     private double heuresDeTransportParSemaine = 0.0;
     private double heuresDeBureauParSemaine = 0.0;
     private double heuresTeleTravailParSemaine = 0.0;
-    private double minimum_minutes_par_semaine;
-    private double minimum_minutes_par_jour = 
-                                AppConfig.getParametreRetournerUnDouble("MINIMUM_MINUTES_BUREAU_PRODUCTION_PAR_JOUR");
-    private double maximum_minutes_par_jour = 
-                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_PAR_JOUR");
-    private double maximum_minutes_par_semaine = 
-                                AppConfig.getParametreRetournerUnDouble("MAXIMUM_MINUTES_BUREAU_EMPLOYE_SEMAINE");
+    private double minimum_minutes_par_semaine = 0.0;
+    private double minimum_minutes_par_jour = 0.0;
+    private double maximum_minutes_par_jour = 0.0;
+    private double maximum_minutes_par_semaine = 0.0;
     private double maximum_minutes_tele_travail_semaine = Double.MAX_VALUE;
     private double maximum_minutes_temps_transport_semaine;
 

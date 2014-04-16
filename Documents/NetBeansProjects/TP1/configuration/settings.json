@@ -36,6 +36,52 @@
   "EMPLOYE_DEVELOPPEMENT":"P",
   "EMPLOYE_PRESIDENT":"C",
   
+      "A": [
+        {
+            "MINIMUM_MINUTES_OFFICE_DAY": 240,
+            "MINIMUM_MINUTES_OFFICE_WEEK": 2250,
+            "MAXIMUM_MINUTES_OFFICE_WEEK": 2490,
+            "MAXIMUM_MINUTES_HOME_WEEK": 600,
+            "MAXIMUM_MINUTES_TRANSPORT": 300
+        }
+    ],
+    "D": [
+        {
+            "MINIMUM_MINUTES_OFFICE_DAY": 480,
+            "MINIMUM_MINUTES_OFFICE_WEEK": 2580,
+            "MAXIMUM_MINUTES_OFFICE_WEEK": -1.0,
+            "MAXIMUM_MINUTES_HOME_WEEK": -1.0,
+            "MAXIMUM_MINUTES_TRANSPORT": 300
+        }
+    ],
+    "E": [
+        {
+            "MINIMUM_MINUTES_OFFICE_DAY": 360,
+            "MINIMUM_MINUTES_OFFICE_WEEK": 2370,
+            "MAXIMUM_MINUTES_OFFICE_WEEK": 2580,
+            "MAXIMUM_MINUTES_HOME_WEEK": -1.0,
+            "MAXIMUM_MINUTES_TRANSPORT": 0
+        }
+    ],
+    "P": [
+        {
+            "MINIMUM_MINUTES_OFFICE_DAY": 360,
+            "MINIMUM_MINUTES_OFFICE_WEEK": 2280,
+            "MAXIMUM_MINUTES_OFFICE_WEEK": 2580,
+            "MAXIMUM_MINUTES_HOME_WEEK": -1.0,
+            "MAXIMUM_MINUTES_TRANSPORT": 0
+        }
+    ],
+    "C": [
+        {
+            "MINIMUM_MINUTES_OFFICE_DAY": 480,
+            "MINIMUM_MINUTES_OFFICE_WEEK": 2250,
+            "MAXIMUM_MINUTES_OFFICE_WEEK": -1.0,
+            "MAXIMUM_MINUTES_HOME_WEEK": -1.0,
+            "MAXIMUM_MINUTES_TRANSPORT": -1.0
+        }
+    ],
+    
   "MSG_HEURES_MINIMUM_BUREAU_JOUR": "L'employe n'a pas travaille le nombre d'heures minimal pour le jour ",
   "MSG_HEURES_MINIMUM_BUREAU_SEMAINE": "L'employe n'a pas travaille le nombre d'heures minimal par semaine",
   

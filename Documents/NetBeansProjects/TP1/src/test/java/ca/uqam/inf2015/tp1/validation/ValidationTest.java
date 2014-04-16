@@ -169,20 +169,25 @@ public class ValidationTest {
         mock.setJours(jours);
         Validation instance = new Validation(mock);
 
-        String expResult = ",L'employe a fait plus de 24h mais moins "
-                + "de 32h pour le jour 1,L'employe n'a pas respecte le"
-                + " nombre d'heures permis du conge ferie le jour 2,,Il"
-                + " n'est pas permis d'avoir plusieurs activités avec le "
-                + "même code de projet pour jour 3,,L'employe a exerce "
-                + "d'autres activites pendant conge maladie ou parental "
-                + "le jour 4,,L'employe a fait plus de 24h mais moins de "
-                + "32h pour le jour 4,,,L'employe n'a pas respecte le nombre "
-                + "d'heures permis du conge ferie le jour 2,L'employe n'a pas "
-                + "droit au conge ferie pour le weekend 2,L'employe n'a pas "
-                + "respecte le nombre d'heures permis du conge parental pour "
-                + "le jour 2,L'employe n'a pas droit au conge parental pour "
-                + "le weekend 2,,,";
+        String expResult = ",L'employe a fait plus de 24h mais moins de 32h"
+                + " pour le jour 1,L'employe n'a pas respecte le nombre d'heures"
+                + " permis du conge ferie le jour 2,,L'employe a fait plus de "
+                + "24h mais moins de 32h pour le jour 2,Il n'est pas permis "
+                + "d'avoir plusieurs activités avec le même code de projet pour"
+                + " jour 3,,L'employe a fait plus de 24h mais moins de 32h pour"
+                + " le jour 3,L'employe a exerce d'autres activites pendant "
+                + "conge maladie ou parental le jour 4,,L'employe a fait plus "
+                + "de 24h mais moins de 32h pour le jour 4,,L'employe a fait "
+                + "plus de 24h mais moins de 32h pour le jour 5,,L'employe n'a "
+                + "pas respecte le nombre d'heures permis du conge ferie le jour"
+                + " 2,L'employe n'a pas droit au conge ferie pour le weekend 2,"
+                + "L'employe n'a pas respecte le nombre d'heures permis du conge"
+                + " parental pour le jour 2,L'employe n'a pas droit au conge "
+                + "parental pour le weekend 2,,L'employe a depasse le nombre "
+                + "d'heures au bureau par semaine,,";
         String result = instance.validerFeuilleDeTemps();
+        
+        
         assertEquals(expResult, result);
 
     }
@@ -237,18 +242,23 @@ public class ValidationTest {
         mock.setJours(jours);
         Validation instance = new Validation(mock);
 
-        String expResult = "L'employe n'a pas respecte le nombre d'heures "
-                + "permis du conge ferie le jour 1,L'employe a exerce "
-                + "d'autres activites pendant conge ferie ou vacance le "
-                + "jour 1,,L'employe n'a pas travaille le nombre d'heures "
-                + "minimal pour le jour 1,L'employe n'a pas respecte le nombre "
-                + "d'heures permis du conge ferie le jour 2,,L'employe n'a pas "
-                + "travaille le nombre d'heures minimal pour le jour 2,,"
-                + "L'employe a exerce d'autres activites pendant conge maladie"
-                + " ou parental le jour 4,,,,L'employe n'a pas respecte le nombre"
-                + " d'heures permis du conge ferie le jour 2,L'employe n'a pas "
-                + "droit au conge ferie pour le weekend 2,,";
+        String expResult = "L'employe n'a pas respecte le nombre d'heures permis"
+                + " du conge ferie le jour 1,L'employe a exerce d'autres "
+                + "activites pendant conge ferie ou vacance le jour 1,,L'employe"
+                + " a fait plus de 24h mais moins de 32h pour le jour 1,"
+                + "L'employe n'a pas respecte le nombre d'heures permis du conge"
+                + " ferie le jour 2,,L'employe a fait plus de 24h mais moins de "
+                + "32h pour le jour 2,,L'employe a fait plus de 24h mais moins "
+                + "de 32h pour le jour 3,L'employe a exerce d'autres activites "
+                + "pendant conge maladie ou parental le jour 4,,L'employe a fait"
+                + " plus de 24h mais moins de 32h pour le jour 4,,L'employe a "
+                + "fait plus de 24h mais moins de 32h pour le jour 5,,L'employe "
+                + "n'a pas respecte le nombre d'heures permis du conge ferie le "
+                + "jour 2,L'employe n'a pas droit au conge ferie pour le weekend"
+                + " 2,,L'employe a depasse le nombre d'heures au bureau par "
+                + "semaine,L'employe n'a pas droit aux temps de transport ,";
         String result = instance.validerSemaine();
+        
         assertEquals(expResult, result);
 
     }
@@ -303,19 +313,18 @@ public class ValidationTest {
         mock.setJours(jours);
         Validation instance = new Validation(mock);
 
-        String expResult = "L'employe n'a pas respecte le nombre d'heures "
-                + "du conge maladie permis le jour 1,L'employe n'a pas "
-                + "respecte le nombre d'heures permis du conge ferie le "
-                + "jour 1,L'employe a exerce d'autres activites pendant "
-                + "conge maladie ou parental le jour 1,,L'employe n'a pas "
-                + "travaille le nombre d'heures minimal pour le jour 1,,"
-                + "L'employe n'a pas travaille le nombre d'heures minimal "
-                + "pour le jour 2,,L'employe n'a pas travaille le nombre d'"
-                + "heures minimal pour le jour 3,,L'employe n'a pas travaille"
-                + " le nombre d'heures minimal pour le jour 4,,L'employe n'a "
-                + "pas travaille le nombre d'heures minimal pour le jour 5,";
+        String expResult = "L'employe n'a pas respecte le nombre d'heures du "
+                + "conge maladie permis le jour 1,L'employe n'a pas respecte le"
+                + " nombre d'heures permis du conge ferie le jour 1,L'employe a"
+                + " exerce d'autres activites pendant conge maladie ou parental"
+                + " le jour 1,,L'employe a fait plus de 24h mais moins de 32h"
+                + " pour le jour 1,,L'employe a fait plus de 24h mais moins de "
+                + "32h pour le jour 2,,L'employe a fait plus de 24h mais moins "
+                + "de 32h pour le jour 3,,L'employe a fait plus de 24h mais "
+                + "moins de 32h pour le jour 4,,L'employe a fait plus de 24h"
+                + " mais moins de 32h pour le jour 5," ;
+        
         String result = instance.validerJoursOuvrables();
-
         assertEquals(expResult, result);
 
     }
@@ -664,31 +673,20 @@ public class ValidationTest {
         System.out.println("getMinimum_minutes_par_semaine");
         MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMinimum_minutes_par_semaine(0.0);
         double expResult = 0.0;
         double result = instance.getMinimum_minutes_par_semaine();
         assertEquals(expResult, result, 0.0);
-        
-        instance.setMinimum_minutes_par_semaine(2560.0);
-        expResult = 2560.0;
-        result = instance.getMinimum_minutes_par_semaine();
-        assertEquals(expResult, result, 0.0);
-    }
+     }
 
     @Test
     public void testGetMinimum_minutes_par_jour() throws IOException {
         System.out.println("getMinimum_minutes_par_jour");
-        MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
+       MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMinimum_minutes_par_jour(0.0);
         double expResult = 0.0;
         double result = instance.getMinimum_minutes_par_jour();
         assertEquals(expResult, result, 0.0);
-        
-        instance.setMinimum_minutes_par_jour(360.0);
-        expResult = 360.0;
-        result = instance.getMinimum_minutes_par_jour();
-        assertEquals(expResult, result, 0.0);
+         
     }
 
     @Test
@@ -696,63 +694,73 @@ public class ValidationTest {
         System.out.println("getMaximum_minutes_par_jour");
         MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMaximum_minutes_par_jour(0.0);
         double expResult = 0.0;
         double result = instance.getMaximum_minutes_par_jour();
         assertEquals(expResult, result, 0.0);
-        
-        instance.setMaximum_minutes_par_jour(360.0);
-        expResult = 360.0;
-        result = instance.getMaximum_minutes_par_jour();
-        assertEquals(expResult, result, 0.0);
+         
     }
 
     @Test
-    public void testGetMaximum_minutes_par_semaine() throws IOException {
+    public void testGetMaximum_minutes_par_semaine()throws IOException {
         System.out.println("getMaximum_minutes_par_semaine");
         MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMaximum_minutes_par_semaine(0.0);
         double expResult = 0.0;
         double result = instance.getMaximum_minutes_par_semaine();
         assertEquals(expResult, result, 0.0);
-        
-        instance.setMaximum_minutes_par_semaine(2560.0);
-        expResult = 2560.0;
+        instance.setMaximum_minutes_par_semaine(5666);
         result = instance.getMaximum_minutes_par_semaine();
+        expResult = 5666;
         assertEquals(expResult, result, 0.0);
+         
     }
 
     @Test
-    public void testGetMaximum_minutes_tele_travail_semaine() throws IOException {
+    public void testGetMaximum_minutes_tele_travail_semaine()throws IOException {
         System.out.println("getMaximum_minutes_tele_travail_semaine");
         MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMaximum_minutes_tele_travail_semaine(0.0);
-        double expResult = 0.0;
+        double expResult = 1.7976931348623157E308;
         double result = instance.getMaximum_minutes_tele_travail_semaine();
-        assertEquals(expResult, result, 0.0);
-        
-        instance.setMaximum_minutes_tele_travail_semaine(60.0);
-        expResult = 60.0;
+         assertEquals(expResult, result, 0.0);
+         
+         instance.setMaximum_minutes_tele_travail_semaine(56);
         result = instance.getMaximum_minutes_tele_travail_semaine();
+        expResult = 56;
         assertEquals(expResult, result, 0.0);
+         
     }
 
     @Test
-    public void testGetMaximum_minutes_temps_transport_semaine() throws IOException {
+    public void testGetMaximum_minutes_temps_transport_semaine()throws IOException {
         System.out.println("getMaximum_minutes_temps_transport_semaine");
         MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
         Validation instance = new Validation(mock);
-        instance.setMaximum_minutes_temps_transport_semaine(0.0);
         double expResult = 0.0;
         double result = instance.getMaximum_minutes_temps_transport_semaine();
         assertEquals(expResult, result, 0.0);
         
-        instance.setMaximum_minutes_temps_transport_semaine(300.0);
-        expResult = 300.0;
+        instance.setMaximum_minutes_temps_transport_semaine(5);
         result = instance.getMaximum_minutes_temps_transport_semaine();
+        expResult = 5;
         assertEquals(expResult, result, 0.0);
+         
+    }
+
+    @Test
+    public void testGetAppliquerCodeTransport() throws IOException {
+        System.out.println("getAppliquerCodeTransport");
+        MockFeuilleDeTemps mock = new MockFeuilleDeTemps();
+        Validation instance = new Validation(mock);
+        int expResult = -1;
+        int result = instance.getAppliquerCodeTransport();
+        assertEquals(expResult, result);
+        
+        instance.setAppliquerCodeTransport(4);
+        result = instance.getAppliquerCodeTransport();
+        expResult = 4;
+        assertEquals(expResult, result);
+         
     }
 
 }

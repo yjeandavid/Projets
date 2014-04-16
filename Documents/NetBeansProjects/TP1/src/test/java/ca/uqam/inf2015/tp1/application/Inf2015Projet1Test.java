@@ -34,8 +34,8 @@ public class Inf2015Projet1Test {
     public void testMain() {
         System.out.println("main");
         String[] args = new String[2];
-        args[0] = "/user/Desktop/file.jsion";
-        args[1] = "/user/Desktop/out.jsion";
+        args[0] = "/user/Desktop/file.json";
+        args[1] = "/user/Desktop/out.json";
         MockInf2015Projet1 mok = new MockInf2015Projet1();
         MockInf2015Projet1 instance = new MockInf2015Projet1();
         instance = mok;

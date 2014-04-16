@@ -1,8 +1,11 @@
 package ca.uqam.inf2015.tp1.application;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+
 import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -30,6 +33,10 @@ public class AppConfig {
         if(configurations == null)chargerParametres();
         return configurations.getString(parametreDemande).charAt(0);
     }
+    
+    public static JSONArray getArray(String askedSetting) {
+		return configurations.getJSONArray(askedSetting);
+	}
 }
 
 

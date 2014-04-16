@@ -1,11 +1,10 @@
 package ca.uqam.inf2015.tp1.gestionDonnees;
 
 import net.sf.json.JSONArray;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class JsonFactory {
-    public static void construireFichierJson(String cheminDuFichier, String messages) throws IOException {
+    public static void construireFichierJson(String messages, FileWriterWrapper fw) throws IOException {
         JSONArray tableDeMessages = new JSONArray();
         String[]  lesMessages     = messages.split(",");
 
@@ -19,21 +18,13 @@ public abstract class JsonFactory {
             tableDeMessages.add(lesMessages[0]);
         }
 
-        EcrireFichierJson(cheminDuFichier, tableDeMessages);
+        EcrireFichierJson(tableDeMessages, fw);
     }
 
-    public static void EcrireFichierJson(String cheminDuFichier, JSONArray messageArray) throws IOException {
-        FileWriter fw = null;
-
-        try {
-            fw = new FileWriter(cheminDuFichier);
-            fw = (FileWriter) messageArray.write(fw);
-        } catch (IOException ex) {
-            throw ex;
-        } finally {
-            fw.flush();
-            fw.close();
-        }
+    public static void EcrireFichierJson(JSONArray messageArray, FileWriterWrapper fw) throws IOException {
+        fw.write(messageArray.toString());
+        fw.flush();
+        fw.close();
     }
 }
 

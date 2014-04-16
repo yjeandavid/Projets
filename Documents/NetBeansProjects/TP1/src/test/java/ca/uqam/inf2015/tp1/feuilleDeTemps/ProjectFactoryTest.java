@@ -1,6 +1,5 @@
 package ca.uqam.inf2015.tp1.feuilleDeTemps;
 
-import ca.uqam.inf2015.tp1.exceptions.MissingDataInJSONFileException;
 import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -56,13 +55,4 @@ public class ProjectFactoryTest {
 
     }
 
-    @Test(expected = MissingDataInJSONFileException.class)
-    public void testConstruireProjetAPartirDeFichierJson1() throws Exception {
-        System.out.println("construireProjetAPartirDeFichierJson1");
-        JSONObject rootElt = new JSONObject();
-        ProjectFactory projet = new ProjectFactory(){};
-        List<List<Projet>> result = projet.construireProjetAPartirDeFichierJson(rootElt);
-        assertNotNull(result);
-
-    }
 }
